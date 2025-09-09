@@ -28,12 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            panel1 = new Panel();
+            zoomIn = new Button();
+            zoomOut = new Button();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Location = new Point(63, 187);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1495, 858);
+            panel1.TabIndex = 0;
+            // 
+            // zoomIn
+            // 
+            zoomIn.Location = new Point(110, 47);
+            zoomIn.Name = "zoomIn";
+            zoomIn.Size = new Size(94, 84);
+            zoomIn.TabIndex = 1;
+            zoomIn.Text = "button1";
+            zoomIn.UseVisualStyleBackColor = true;
+            // 
+            // zoomOut
+            // 
+            zoomOut.Location = new Point(220, 47);
+            zoomOut.Name = "zoomOut";
+            zoomOut.Size = new Size(94, 84);
+            zoomOut.TabIndex = 1;
+            zoomOut.Text = "button1";
+            zoomOut.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1631, 1134);
+            Controls.Add(zoomOut);
+            Controls.Add(zoomIn);
+            Controls.Add(panel1);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel panel1;
+        private Button zoomIn;
+        private Button zoomOut;
     }
 }
