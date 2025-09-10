@@ -71,5 +71,21 @@ namespace сomputer_graphics_lab_1
 
             }
         }
+
+        public class dilatationMatrix: Matrix<double>
+        {
+            public dilatationMatrix(double a, double b): base(3, 3)
+            {
+                innerMatrix[0][0] = a;
+                innerMatrix[0][1] = 0;
+                innerMatrix[0][2] = 0;
+                innerMatrix[1][0] = 0;
+                innerMatrix[1][1] = b;
+                innerMatrix[1][2] = 0;
+                innerMatrix[2][0] = 0;
+                innerMatrix[2][1] = 0;
+                innerMatrix[2][2] = 1;
+            }
+        }
     }
 }
