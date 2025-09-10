@@ -22,7 +22,8 @@ namespace сomputer_graphics_lab_1
             set => innerMatrix[i][j] = value;
         }
 
-        public Matrix(int row, int col) {
+        public Matrix(int row, int col)
+        {
             innerMatrix = new List<List<T>>();
             for (int i = 0; i < row; i++)
             {
@@ -30,7 +31,8 @@ namespace сomputer_graphics_lab_1
             }
         }
 
-        public Matrix<T> multiplyMatrix(Matrix<T> subMatrix) {
+        public Matrix<T> multiplyMatrix(Matrix<T> subMatrix)
+        {
             int controlNum = getCols();
             int rows = getRows();
             int cols = subMatrix.getCols();
@@ -40,7 +42,7 @@ namespace сomputer_graphics_lab_1
                 for (int j = 0; j < cols; j++)
                 {
                     T sum = default(T);
-                    for (int k = 0; k <controlNum; k++)
+                    for (int k = 0; k < controlNum; k++)
                     {
                         sum += innerMatrix[i][k] * subMatrix[k, j];
                     }
@@ -51,13 +53,23 @@ namespace сomputer_graphics_lab_1
             return result;
         }
 
-    public class rotationMatrix: Matrix
-    {
-        public rotationMatrix(double angle) 
+        public class rotationMatrix : Matrix<double>
         {
-            double sinAngle = Math.Sin(angle);
-            double cosAngle = Math.Cos(angle);
+            public rotationMatrix(double angle) : base(3, 3)
+            {
+                double sinAngle = Math.Sin(angle);
+                double cosAngle = Math.Cos(angle);
+                innerMatrix[0][0] = cosAngle;
+                innerMatrix[0][1] = sinAngle;
+                innerMatrix[0][2] = 0;
+                innerMatrix[1][0] = -sinAngle;
+                innerMatrix[1][1] = cosAngle;
+                innerMatrix[1][2] = 0;
+                innerMatrix[2][0] = 0;
+                innerMatrix[2][1] = 0;
+                innerMatrix[2][2] = 1;
 
+            }
         }
     }
 }
