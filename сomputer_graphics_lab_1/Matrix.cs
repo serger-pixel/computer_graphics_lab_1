@@ -87,5 +87,21 @@ namespace сomputer_graphics_lab_1
                 innerMatrix[2][2] = 1;
             }
         }
+
+        public class translationMatrix: Matrix<double>
+        {
+            public translationMatrix(double a, double b): base(3, 3)
+            {
+                innerMatrix[0][0] = 1;
+                innerMatrix[0][1] = 0;
+                innerMatrix[0][2] = 0;
+                innerMatrix[1][0] = 0;
+                innerMatrix[1][1] = 1;
+                innerMatrix[1][2] = 0;
+                innerMatrix[2][0] = a;
+                innerMatrix[2][1] = b;
+                innerMatrix[2][2] = 1;
+            }
+        }
     }
 }
