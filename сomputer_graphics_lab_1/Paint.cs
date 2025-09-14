@@ -16,7 +16,7 @@ namespace сomputer_graphics_lab_1
         private Graphics g;
         Pen pen = new Pen(Color.Black, 2);
 
-        private Paint()
+        public Paint()
         {
             coords = new Matrix<double>(40, 3);
             coords[0, 0] = -1;
@@ -105,15 +105,29 @@ namespace сomputer_graphics_lab_1
             connections[connections.Count - 1] = new List<int>() { 19, 39 };
         }
 
+        public Matrix<double> transformMatrix(Panel paintPanel)
+        {
+            Matrix<double> result = new Matrix<double>(coords.getRows(), coords.getCols());
+            const int zoomPix = 10;
+            for (int i = 0; i < coords.getRows(); i++)
+            {
+                result[i, 0] = paintPanel.Width / 2 + coords[i, 0];
+                result[i, 1] = paintPanel.Height / 2 + coords[i, 1];
+                result[i, 2] = 1;
+            }
+            return result;
+        }
+
         private void draw()
         {
             Matrix<double> displayCoord = null;
 
         }
 
-        private void move()
+        private void move(int a, int b)
         {
-
+            translationMatrix matrix = new translationMatrix(a, b);
+            coords = coords.multiplyMatrix(matrix);
         }
 
         private void zoom()
