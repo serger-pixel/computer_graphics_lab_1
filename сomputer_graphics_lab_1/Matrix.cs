@@ -57,6 +57,7 @@ namespace сomputer_graphics_lab_1
 
             return result;
         }
+
     }
 
     public class rotationMatrix : Matrix<double>

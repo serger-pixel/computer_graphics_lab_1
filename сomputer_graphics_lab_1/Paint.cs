@@ -82,15 +82,22 @@ namespace сomputer_graphics_lab_1
             for (int i = 20; i < 40; i++)
             {
                 coords[i, 0] = coords[i - 20, 0] * -1;
-                coords[i, 1] = coords[i - 20, 1] * -1;
-                coords[i, 2] = coords[i - 20, 1];
+                coords[i, 1] = coords[i - 20, 1];
+                coords[i, 2] = 1;
             }
+            coords[40, 0] = 0;
+            coords[40, 1] = 0;
+            coords[40, 2] = 1;
+
 
             connections = new List<List<int>>();
             for (int i = 0; i < 40; i++)
             {
                 if (i == 17 || i == 18 || i == 19 || i == 37 || i == 38 || i == 39 
                     || i == 16 || i == 36)
+                {
+                    continue;
+                }
                 connections.Add(new List<int> { i, i + 1 });
             }
             connections.Add(new List<int>() { 17, 18 });
@@ -99,6 +106,11 @@ namespace сomputer_graphics_lab_1
             connections.Add(new List<int>() { 37, 17 });
             connections.Add(new List<int>() { 19, 39 });
             connections.Add(new List<int>() { 16, 36 });
+            connections.Add(new List<int>() { 2, 5 });
+            connections.Add(new List<int>() { 22, 25 });
+            connections.Add(new List<int>() { 20, 39 });
+            connections.Add(new List<int>() { 0, 19 });
+
         }
 
         public Matrix<double> transformMatrix(Panel paintPanel)
@@ -108,7 +120,7 @@ namespace сomputer_graphics_lab_1
             for (int i = 0; i < coords.getRows(); i++)
             {
                 result[i, 0] = paintPanel.Width / 2 + zoomPix * coords[i, 0];
-                result[i, 1] = paintPanel.Height / 2 + zoomPix* coords[i, 1];
+                result[i, 1] = paintPanel.Height / 2 - zoomPix* coords[i, 1];
                 result[i, 2] = 1;
             }
             return result;

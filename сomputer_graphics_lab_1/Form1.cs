@@ -22,6 +22,7 @@ namespace сomputer_graphics_lab_1
         public Form1()
         {
             InitializeComponent();
+            paintPanel.Paint += Form1_Paint;
         }
     }
 }
