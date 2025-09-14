@@ -11,7 +11,7 @@ namespace сomputer_graphics_lab_1
     {
         private Matrix<double> coords;
 
-        private List<List<int>> connections;
+        public List<List<int>> connections;
 
         private Graphics g;
         Pen pen = new Pen(Color.Black, 2);
@@ -89,20 +89,16 @@ namespace сomputer_graphics_lab_1
             connections = new List<List<int>>();
             for (int i = 0; i < 40; i++)
             {
-                if (i == 17 || i == 18 || i == 19 || i == 37 || i == 38 || i == 39)
-                connections.Add(new List<int>());
-                connections[connections.Count - 1] = new List<int>() { i, i+1 };
+                if (i == 17 || i == 18 || i == 19 || i == 37 || i == 38 || i == 39 
+                    || i == 16 || i == 36)
+                connections.Add(new List<int> { i, i + 1 });
             }
-            connections.Add(new List<int>());
-            connections[connections.Count - 1] = new List<int>() { 17, 18 };
-            connections.Add(new List<int>());
-            connections[connections.Count - 1] = new List<int>() { 18, 38 };
-            connections.Add(new List<int>());
-            connections[connections.Count - 1] = new List<int>() { 38, 37 };
-            connections.Add(new List<int>());
-            connections[connections.Count - 1] = new List<int>() { 37, 17 };
-            connections.Add(new List<int>());
-            connections[connections.Count - 1] = new List<int>() { 19, 39 };
+            connections.Add(new List<int>() { 17, 18 });
+            connections.Add(new List<int>() { 18, 38 });
+            connections.Add(new List<int>() { 38, 37 });
+            connections.Add(new List<int>() { 37, 17 });
+            connections.Add(new List<int>() { 19, 39 });
+            connections.Add(new List<int>() { 16, 36 });
         }
 
         public Matrix<double> transformMatrix(Panel paintPanel)
@@ -111,8 +107,8 @@ namespace сomputer_graphics_lab_1
             const int zoomPix = 10;
             for (int i = 0; i < coords.getRows(); i++)
             {
-                result[i, 0] = paintPanel.Width / 2 + coords[i, 0];
-                result[i, 1] = paintPanel.Height / 2 + coords[i, 1];
+                result[i, 0] = paintPanel.Width / 2 + zoomPix * coords[i, 0];
+                result[i, 1] = paintPanel.Height / 2 + zoomPix* coords[i, 1];
                 result[i, 2] = 1;
             }
             return result;
