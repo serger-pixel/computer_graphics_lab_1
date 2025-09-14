@@ -23,138 +23,198 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            paintPanel = new Panel();
-            buttonLeft = new Button();
-            buttonRight = new Button();
-            buttonUp = new Button();
-            buttonDown = new Button();
-            rotationLeft = new Button();
-            rotationRight = new Button();
-            zoomIn = new Button();
-            zoomOut = new Button();
+            paintPanel = new System.Windows.Forms.Panel();
+            buttonDown = new System.Windows.Forms.Button();
+            rotationLeft = new System.Windows.Forms.Button();
+            rotationRight = new System.Windows.Forms.Button();
+            zoomIn = new System.Windows.Forms.Button();
+            zoomOut = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
+            buttonUp = new System.Windows.Forms.Button();
+            buttonLeft = new System.Windows.Forms.Button();
+            buttonRight = new System.Windows.Forms.Button();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // paintPanel
             // 
-            paintPanel.Location = new Point(63, 187);
+            paintPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            paintPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            paintPanel.ForeColor = System.Drawing.SystemColors.ControlDark;
+            paintPanel.Location = new System.Drawing.Point(2, 1);
             paintPanel.Name = "paintPanel";
-            paintPanel.Size = new Size(1495, 858);
+            paintPanel.Size = new System.Drawing.Size(1215, 480);
             paintPanel.TabIndex = 0;
-            // 
-            // buttonLeft
-            // 
-            buttonLeft.Location = new Point(63, 47);
-            buttonLeft.Name = "buttonLeft";
-            buttonLeft.Size = new Size(94, 84);
-            buttonLeft.TabIndex = 1;
-            buttonLeft.Text = "Влево";
-            buttonLeft.UseVisualStyleBackColor = true;
-            buttonLeft.Click += buttonLeft_Click;
-            // 
-            // buttonRight
-            // 
-            buttonRight.Location = new Point(220, 47);
-            buttonRight.Name = "buttonRight";
-            buttonRight.Size = new Size(94, 84);
-            buttonRight.TabIndex = 1;
-            buttonRight.Text = "Вправо";
-            buttonRight.UseVisualStyleBackColor = true;
-            buttonRight.Click += buttonRight_Click;
-            // 
-            // buttonUp
-            // 
-            buttonUp.Location = new Point(370, 52);
-            buttonUp.Name = "buttonUp";
-            buttonUp.Size = new Size(112, 75);
-            buttonUp.TabIndex = 2;
-            buttonUp.Text = "Вверх";
-            buttonUp.UseVisualStyleBackColor = true;
-            buttonUp.Click += buttonUp_Click;
             // 
             // buttonDown
             // 
-            buttonDown.Location = new Point(537, 52);
+            buttonDown.Location = new System.Drawing.Point(68, 82);
             buttonDown.Name = "buttonDown";
-            buttonDown.Size = new Size(112, 75);
-            buttonDown.TabIndex = 3;
-            buttonDown.Text = "Вниз";
+            buttonDown.Size = new System.Drawing.Size(37, 33);
+            buttonDown.TabIndex = 2;
+            buttonDown.Text = "v";
             buttonDown.UseVisualStyleBackColor = true;
-            buttonDown.Click += buttonDown_Click;
+            buttonDown.Click += buttonUp_Click;
             // 
             // rotationLeft
             // 
-            rotationLeft.Location = new Point(671, 52);
+            rotationLeft.Location = new System.Drawing.Point(25, 39);
             rotationLeft.Name = "rotationLeft";
-            rotationLeft.Size = new Size(112, 71);
+            rotationLeft.Size = new System.Drawing.Size(112, 63);
             rotationLeft.TabIndex = 4;
-            rotationLeft.Text = "Поворот влево";
+            rotationLeft.Text = "Влево";
             rotationLeft.UseVisualStyleBackColor = true;
             rotationLeft.Click += rotationLeft_Click;
             // 
             // rotationRight
             // 
-            rotationRight.Location = new Point(789, 58);
+            rotationRight.Location = new System.Drawing.Point(177, 39);
             rotationRight.Name = "rotationRight";
-            rotationRight.Size = new Size(112, 62);
+            rotationRight.Size = new System.Drawing.Size(112, 63);
             rotationRight.TabIndex = 5;
-            rotationRight.Text = "Поворот вправо";
+            rotationRight.Text = "Вправо";
             rotationRight.UseVisualStyleBackColor = true;
             rotationRight.Click += rotationRight_Click;
             // 
             // zoomIn
             // 
-            zoomIn.Location = new Point(924, 61);
+            zoomIn.Location = new System.Drawing.Point(32, 35);
             zoomIn.Name = "zoomIn";
-            zoomIn.Size = new Size(122, 59);
+            zoomIn.Size = new System.Drawing.Size(58, 49);
             zoomIn.TabIndex = 6;
-            zoomIn.Text = "Увеличение";
+            zoomIn.Text = "+";
             zoomIn.UseVisualStyleBackColor = true;
             zoomIn.Click += zoomIn_Click;
             // 
             // zoomOut
             // 
-            zoomOut.Location = new Point(1052, 63);
+            zoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            zoomOut.Location = new System.Drawing.Point(123, 35);
             zoomOut.Name = "zoomOut";
-            zoomOut.Size = new Size(142, 55);
+            zoomOut.Size = new System.Drawing.Size(58, 49);
             zoomOut.TabIndex = 7;
-            zoomOut.Text = "Уменьшение";
+            zoomOut.Text = "-";
             zoomOut.UseVisualStyleBackColor = true;
             zoomOut.Click += zoomOut_Click;
             // 
+            // button1
+            // 
+            button1.Location = new System.Drawing.Point(1096, 547);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(121, 46);
+            button1.TabIndex = 8;
+            button1.Text = "Выход";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // buttonUp
+            // 
+            buttonUp.Location = new System.Drawing.Point(68, 30);
+            buttonUp.Name = "buttonUp";
+            buttonUp.Size = new System.Drawing.Size(37, 33);
+            buttonUp.TabIndex = 3;
+            buttonUp.Text = "^";
+            buttonUp.UseVisualStyleBackColor = true;
+            buttonUp.Click += buttonDown_Click;
+            // 
+            // buttonLeft
+            // 
+            buttonLeft.Location = new System.Drawing.Point(25, 54);
+            buttonLeft.Name = "buttonLeft";
+            buttonLeft.Size = new System.Drawing.Size(37, 33);
+            buttonLeft.TabIndex = 1;
+            buttonLeft.Text = "<";
+            buttonLeft.UseVisualStyleBackColor = true;
+            buttonLeft.Click += buttonLeft_Click;
+            // 
+            // buttonRight
+            // 
+            buttonRight.Location = new System.Drawing.Point(111, 56);
+            buttonRight.Name = "buttonRight";
+            buttonRight.Size = new System.Drawing.Size(37, 33);
+            buttonRight.TabIndex = 1;
+            buttonRight.Text = ">";
+            buttonRight.UseVisualStyleBackColor = true;
+            buttonRight.Click += buttonRight_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(buttonRight);
+            groupBox1.Controls.Add(buttonLeft);
+            groupBox1.Controls.Add(buttonUp);
+            groupBox1.Controls.Add(buttonDown);
+            groupBox1.Location = new System.Drawing.Point(50, 483);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(168, 121);
+            groupBox1.TabIndex = 10;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Перемещение";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(rotationRight);
+            groupBox2.Controls.Add(rotationLeft);
+            groupBox2.Location = new System.Drawing.Point(422, 483);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new System.Drawing.Size(313, 115);
+            groupBox2.TabIndex = 11;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Поворот";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(zoomOut);
+            groupBox3.Controls.Add(zoomIn);
+            groupBox3.Location = new System.Drawing.Point(851, 488);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new System.Drawing.Size(202, 106);
+            groupBox3.TabIndex = 12;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Масштаб";
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1631, 1134);
-            Controls.Add(zoomOut);
-            Controls.Add(zoomIn);
-            Controls.Add(rotationRight);
-            Controls.Add(rotationLeft);
-            Controls.Add(buttonDown);
-            Controls.Add(buttonUp);
-            Controls.Add(buttonRight);
-            Controls.Add(buttonLeft);
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1221, 606);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Controls.Add(button1);
             Controls.Add(paintPanel);
-            Name = "Form1";
-            Text = "Form1";
+            Text = "Лабораторная работа_КГ";
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+
+        private System.Windows.Forms.Button button1;
+
         #endregion
 
-        private Panel paintPanel;
-        private Button buttonLeft;
-        private Button buttonRight;
-        private Button buttonUp;
-        private Button buttonDown;
-        private Button rotationLeft;
-        private Button rotationRight;
-        private Button zoomIn;
-        private Button zoomOut;
+        private System.Windows.Forms.Panel paintPanel;
+        private System.Windows.Forms.Button buttonLeft;
+        private System.Windows.Forms.Button buttonRight;
+        private System.Windows.Forms.Button buttonUp;
+        private System.Windows.Forms.Button buttonDown;
+        private System.Windows.Forms.Button rotationLeft;
+        private System.Windows.Forms.Button rotationRight;
+        private System.Windows.Forms.Button zoomIn;
+        private System.Windows.Forms.Button zoomOut;
     }
 }

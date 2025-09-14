@@ -125,13 +125,6 @@ namespace сomputer_graphics_lab_1
             }
             return result;
         }
-
-        private void draw()
-        {
-            Matrix<double> displayCoord = null;
-
-        }
-
         public List<double> getCenter()
         {
             return new List<double>() { coords[40, 0], coords[40, 1], coords[40, 2] };

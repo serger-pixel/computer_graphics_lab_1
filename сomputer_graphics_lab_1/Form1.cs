@@ -21,6 +21,7 @@ namespace сomputer_graphics_lab_1
 
         public Form1()
         {
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
             InitializeComponent();
             paintPanel.Paint += Form1_Paint;
         }
@@ -84,5 +85,7 @@ namespace сomputer_graphics_lab_1
             rabbit.move(center[0], center[1]);
             paintPanel.Invalidate();
         }
+
+        private void button1_Click(object sender, EventArgs e)=> Application.Exit();
     }
 }
