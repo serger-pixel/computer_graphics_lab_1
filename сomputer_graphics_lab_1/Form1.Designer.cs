@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             paintPanel = new Panel();
-            zoomIn = new Button();
-            zoomOut = new Button();
+            buttonLeft = new Button();
+            buttonRight = new Button();
+            buttonUp = new Button();
+            buttonDown = new Button();
             SuspendLayout();
             // 
             // paintPanel
@@ -40,31 +42,55 @@
             paintPanel.Size = new Size(1495, 858);
             paintPanel.TabIndex = 0;
             // 
-            // zoomIn
+            // buttonLeft
             // 
-            zoomIn.Location = new Point(104, 12);
-            zoomIn.Name = "zoomIn";
-            zoomIn.Size = new Size(94, 84);
-            zoomIn.TabIndex = 1;
-            zoomIn.Text = "button1";
-            zoomIn.UseVisualStyleBackColor = true;
+            buttonLeft.Location = new Point(63, 47);
+            buttonLeft.Name = "buttonLeft";
+            buttonLeft.Size = new Size(94, 84);
+            buttonLeft.TabIndex = 1;
+            buttonLeft.Text = "button1";
+            buttonLeft.UseVisualStyleBackColor = true;
+            buttonLeft.Click += buttonLeft_Click;
             // 
-            // zoomOut
+            // buttonRight
             // 
-            zoomOut.Location = new Point(220, 47);
-            zoomOut.Name = "zoomOut";
-            zoomOut.Size = new Size(94, 84);
-            zoomOut.TabIndex = 1;
-            zoomOut.Text = "button1";
-            zoomOut.UseVisualStyleBackColor = true;
+            buttonRight.Location = new Point(220, 47);
+            buttonRight.Name = "buttonRight";
+            buttonRight.Size = new Size(94, 84);
+            buttonRight.TabIndex = 1;
+            buttonRight.Text = "button1";
+            buttonRight.UseVisualStyleBackColor = true;
+            buttonRight.Click += buttonRight_Click;
+            // 
+            // buttonUp
+            // 
+            buttonUp.Location = new Point(379, 81);
+            buttonUp.Name = "buttonUp";
+            buttonUp.Size = new Size(112, 34);
+            buttonUp.TabIndex = 2;
+            buttonUp.Text = "button1";
+            buttonUp.UseVisualStyleBackColor = true;
+            buttonUp.Click += buttonUp_Click;
+            // 
+            // buttonDown
+            // 
+            buttonDown.Location = new Point(551, 82);
+            buttonDown.Name = "buttonDown";
+            buttonDown.Size = new Size(112, 34);
+            buttonDown.TabIndex = 3;
+            buttonDown.Text = "button2";
+            buttonDown.UseVisualStyleBackColor = true;
+            buttonDown.Click += buttonDown_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1631, 1134);
-            Controls.Add(zoomOut);
-            Controls.Add(zoomIn);
+            Controls.Add(buttonDown);
+            Controls.Add(buttonUp);
+            Controls.Add(buttonRight);
+            Controls.Add(buttonLeft);
             Controls.Add(paintPanel);
             Name = "Form1";
             Text = "Form1";
@@ -74,7 +100,9 @@
         #endregion
 
         private Panel paintPanel;
-        private Button zoomIn;
-        private Button zoomOut;
+        private Button buttonLeft;
+        private Button buttonRight;
+        private Button buttonUp;
+        private Button buttonDown;
     }
 }

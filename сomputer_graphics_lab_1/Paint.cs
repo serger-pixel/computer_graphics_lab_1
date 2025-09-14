@@ -18,7 +18,7 @@ namespace сomputer_graphics_lab_1
 
         public Paint()
         {
-            coords = new Matrix<double>(40, 3);
+            coords = new Matrix<double>(41, 3);
             coords[0, 0] = -1;
             coords[0, 1] = 20;
             coords[0, 2] = 1;
@@ -132,7 +132,7 @@ namespace сomputer_graphics_lab_1
 
         }
 
-        private void move(int a, int b)
+        public void move(int a, int b)
         {
             translationMatrix matrix = new translationMatrix(a, b);
             coords = coords.multiplyMatrix(matrix);

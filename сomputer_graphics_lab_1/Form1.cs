@@ -24,5 +24,29 @@ namespace сomputer_graphics_lab_1
             InitializeComponent();
             paintPanel.Paint += Form1_Paint;
         }
+
+        private void buttonRight_Click(object sender, EventArgs e)
+        {
+            rabbit.move(10, 0);
+            paintPanel.Invalidate();
+        }
+
+        private void buttonLeft_Click(object sender, EventArgs e)
+        {
+            rabbit.move(-10, 0);
+            paintPanel.Invalidate();
+        }
+
+        private void buttonUp_Click(object sender, EventArgs e)
+        {
+            rabbit.move(0, -10);
+            paintPanel.Invalidate();
+        }
+
+        private void buttonDown_Click(object sender, EventArgs e)
+        {
+            rabbit.move(0, 10);
+            paintPanel.Invalidate();
+        }
     }
 }
