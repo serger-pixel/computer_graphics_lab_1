@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            paintPanel = new Panel();
             zoomIn = new Button();
             zoomOut = new Button();
             SuspendLayout();
             // 
-            // panel1
+            // paintPanel
             // 
-            panel1.Location = new Point(63, 187);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1495, 858);
-            panel1.TabIndex = 0;
+            paintPanel.Location = new Point(63, 187);
+            paintPanel.Name = "paintPanel";
+            paintPanel.Size = new Size(1495, 858);
+            paintPanel.TabIndex = 0;
             // 
             // zoomIn
             // 
-            zoomIn.Location = new Point(110, 47);
+            zoomIn.Location = new Point(104, 12);
             zoomIn.Name = "zoomIn";
             zoomIn.Size = new Size(94, 84);
             zoomIn.TabIndex = 1;
@@ -65,7 +65,7 @@
             ClientSize = new Size(1631, 1134);
             Controls.Add(zoomOut);
             Controls.Add(zoomIn);
-            Controls.Add(panel1);
+            Controls.Add(paintPanel);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -73,7 +73,7 @@
 
         #endregion
 
-        private Panel panel1;
+        private Panel paintPanel;
         private Button zoomIn;
         private Button zoomOut;
     }
