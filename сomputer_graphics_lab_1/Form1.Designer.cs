@@ -52,7 +52,7 @@
             buttonLeft.Name = "buttonLeft";
             buttonLeft.Size = new Size(94, 84);
             buttonLeft.TabIndex = 1;
-            buttonLeft.Text = "button1";
+            buttonLeft.Text = "Влево";
             buttonLeft.UseVisualStyleBackColor = true;
             buttonLeft.Click += buttonLeft_Click;
             // 
@@ -62,67 +62,67 @@
             buttonRight.Name = "buttonRight";
             buttonRight.Size = new Size(94, 84);
             buttonRight.TabIndex = 1;
-            buttonRight.Text = "button1";
+            buttonRight.Text = "Вправо";
             buttonRight.UseVisualStyleBackColor = true;
             buttonRight.Click += buttonRight_Click;
             // 
             // buttonUp
             // 
-            buttonUp.Location = new Point(379, 81);
+            buttonUp.Location = new Point(370, 52);
             buttonUp.Name = "buttonUp";
-            buttonUp.Size = new Size(112, 34);
+            buttonUp.Size = new Size(112, 75);
             buttonUp.TabIndex = 2;
-            buttonUp.Text = "button1";
+            buttonUp.Text = "Вверх";
             buttonUp.UseVisualStyleBackColor = true;
             buttonUp.Click += buttonUp_Click;
             // 
             // buttonDown
             // 
-            buttonDown.Location = new Point(551, 82);
+            buttonDown.Location = new Point(537, 52);
             buttonDown.Name = "buttonDown";
-            buttonDown.Size = new Size(112, 34);
+            buttonDown.Size = new Size(112, 75);
             buttonDown.TabIndex = 3;
-            buttonDown.Text = "button2";
+            buttonDown.Text = "Вниз";
             buttonDown.UseVisualStyleBackColor = true;
             buttonDown.Click += buttonDown_Click;
             // 
             // rotationLeft
             // 
-            rotationLeft.Location = new Point(721, 82);
+            rotationLeft.Location = new Point(671, 52);
             rotationLeft.Name = "rotationLeft";
-            rotationLeft.Size = new Size(112, 34);
+            rotationLeft.Size = new Size(112, 71);
             rotationLeft.TabIndex = 4;
-            rotationLeft.Text = "button1";
+            rotationLeft.Text = "Поворот влево";
             rotationLeft.UseVisualStyleBackColor = true;
             rotationLeft.Click += rotationLeft_Click;
             // 
             // rotationRight
             // 
-            rotationRight.Location = new Point(890, 81);
+            rotationRight.Location = new Point(789, 58);
             rotationRight.Name = "rotationRight";
-            rotationRight.Size = new Size(112, 34);
+            rotationRight.Size = new Size(112, 62);
             rotationRight.TabIndex = 5;
-            rotationRight.Text = "button2";
+            rotationRight.Text = "Поворот вправо";
             rotationRight.UseVisualStyleBackColor = true;
             rotationRight.Click += rotationRight_Click;
             // 
             // zoomIn
             // 
-            zoomIn.Location = new Point(1044, 81);
+            zoomIn.Location = new Point(924, 61);
             zoomIn.Name = "zoomIn";
-            zoomIn.Size = new Size(112, 34);
+            zoomIn.Size = new Size(122, 59);
             zoomIn.TabIndex = 6;
-            zoomIn.Text = "button1";
+            zoomIn.Text = "Увеличение";
             zoomIn.UseVisualStyleBackColor = true;
             zoomIn.Click += zoomIn_Click;
             // 
             // zoomOut
             // 
-            zoomOut.Location = new Point(1180, 81);
+            zoomOut.Location = new Point(1052, 63);
             zoomOut.Name = "zoomOut";
-            zoomOut.Size = new Size(112, 34);
+            zoomOut.Size = new Size(142, 55);
             zoomOut.TabIndex = 7;
-            zoomOut.Text = "button1";
+            zoomOut.Text = "Уменьшение";
             zoomOut.UseVisualStyleBackColor = true;
             zoomOut.Click += zoomOut_Click;
             // 
