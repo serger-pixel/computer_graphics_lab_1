@@ -36,6 +36,7 @@
             rotationLeft = new Button();
             rotationRight = new Button();
             zoomIn = new Button();
+            zoomOut = new Button();
             SuspendLayout();
             // 
             // paintPanel
@@ -93,7 +94,7 @@
             rotationLeft.TabIndex = 4;
             rotationLeft.Text = "button1";
             rotationLeft.UseVisualStyleBackColor = true;
-            rotationLeft.Click += rotationRight_Click;
+            rotationLeft.Click += rotationLeft_Click;
             // 
             // rotationRight
             // 
@@ -103,11 +104,11 @@
             rotationRight.TabIndex = 5;
             rotationRight.Text = "button2";
             rotationRight.UseVisualStyleBackColor = true;
-            rotationRight.Click += rotationRight_Click_1;
+            rotationRight.Click += rotationRight_Click;
             // 
             // zoomIn
             // 
-            zoomIn.Location = new Point(1071, 90);
+            zoomIn.Location = new Point(1044, 81);
             zoomIn.Name = "zoomIn";
             zoomIn.Size = new Size(112, 34);
             zoomIn.TabIndex = 6;
@@ -115,11 +116,22 @@
             zoomIn.UseVisualStyleBackColor = true;
             zoomIn.Click += zoomIn_Click;
             // 
+            // zoomOut
+            // 
+            zoomOut.Location = new Point(1180, 81);
+            zoomOut.Name = "zoomOut";
+            zoomOut.Size = new Size(112, 34);
+            zoomOut.TabIndex = 7;
+            zoomOut.Text = "button1";
+            zoomOut.UseVisualStyleBackColor = true;
+            zoomOut.Click += zoomOut_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1631, 1134);
+            Controls.Add(zoomOut);
             Controls.Add(zoomIn);
             Controls.Add(rotationRight);
             Controls.Add(rotationLeft);
@@ -143,5 +155,6 @@
         private Button rotationLeft;
         private Button rotationRight;
         private Button zoomIn;
+        private Button zoomOut;
     }
 }

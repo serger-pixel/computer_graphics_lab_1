@@ -150,11 +150,10 @@ namespace сomputer_graphics_lab_1
 
         }
 
-        private void zoom(double a, double b)
+        public void zoom(double a, double b)
         {
             dilatationMatrix matrix = new dilatationMatrix(a, b);
-
-
+            coords = coords.multiplyMatrix(matrix);
         }
     }
 }

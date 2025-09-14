@@ -49,7 +49,7 @@ namespace сomputer_graphics_lab_1
             paintPanel.Invalidate();
         }
 
-        private void rotationRight_Click(object sender, EventArgs e)
+        private void rotationLeft_Click(object sender, EventArgs e)
         {
             List<double> center = rabbit.getCenter();
             rabbit.move(center[0] * -1, center[1] * -1);
@@ -58,7 +58,7 @@ namespace сomputer_graphics_lab_1
             paintPanel.Invalidate();
         }
 
-        private void rotationRight_Click_1(object sender, EventArgs e)
+        private void rotationRight_Click(object sender, EventArgs e)
         {
             List<double> center = rabbit.getCenter();
             rabbit.move(center[0] * -1, center[1] * -1);
@@ -69,7 +69,20 @@ namespace сomputer_graphics_lab_1
 
         private void zoomIn_Click(object sender, EventArgs e)
         {
+            List<double> center = rabbit.getCenter();
+            rabbit.move(center[0] * -1, center[1] * -1);
+            rabbit.zoom(1.5, 1.5);
+            rabbit.move(center[0], center[1]);
+            paintPanel.Invalidate();
+        }
 
+        private void zoomOut_Click(object sender, EventArgs e)
+        {
+            List<double> center = rabbit.getCenter();
+            rabbit.move(center[0] * -1, center[1] * -1);
+            rabbit.zoom(0.6, 0.6);
+            rabbit.move(center[0], center[1]);
+            paintPanel.Invalidate();
         }
     }
 }
