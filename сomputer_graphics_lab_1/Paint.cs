@@ -132,14 +132,28 @@ namespace сomputer_graphics_lab_1
 
         }
 
-        public void move(int a, int b)
+        public List<double> getCenter()
+        {
+            return new List<double>() { coords[40, 0], coords[40, 1], coords[40, 2] };
+        }
+
+        public void move(double a, double b)
         {
             translationMatrix matrix = new translationMatrix(a, b);
             coords = coords.multiplyMatrix(matrix);
         }
 
-        private void zoom()
+        public void rotation(double a)
         {
+            rotationMatrix matrix = new rotationMatrix(a);
+            coords = coords.multiplyMatrix(matrix);
+
+        }
+
+        private void zoom(double a, double b)
+        {
+            dilatationMatrix matrix = new dilatationMatrix(a, b);
+
 
         }
     }

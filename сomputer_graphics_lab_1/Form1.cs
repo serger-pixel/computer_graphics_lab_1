@@ -11,10 +11,10 @@ namespace сomputer_graphics_lab_1
             Matrix<double> displayRabit = rabbit.transformMatrix(paintPanel);
             for (int i = 0; i < rabbit.connections.Count; i++)
             {
-                int x1 = (int)displayRabit[rabbit.connections[i][0], 0];
-                int y1 = (int)displayRabit[rabbit.connections[i][0], 1];
-                int x2 = (int)displayRabit[rabbit.connections[i][1], 0];
-                int y2 = (int)displayRabit[rabbit.connections[i][1], 1];
+                int x1 = (int)displayRabit[rabbit.connections[i][0], 0] + 1;
+                int y1 = (int)displayRabit[rabbit.connections[i][0], 1] + 1;
+                int x2 = (int)displayRabit[rabbit.connections[i][1], 0] + 1;
+                int y2 = (int)displayRabit[rabbit.connections[i][1], 1] + 1;
                 g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
             }
         }
@@ -47,6 +47,29 @@ namespace сomputer_graphics_lab_1
         {
             rabbit.move(0, 10);
             paintPanel.Invalidate();
+        }
+
+        private void rotationRight_Click(object sender, EventArgs e)
+        {
+            List<double> center = rabbit.getCenter();
+            rabbit.move(center[0] * -1, center[1] * -1);
+            rabbit.rotation(0.35);
+            rabbit.move(center[0], center[1]);
+            paintPanel.Invalidate();
+        }
+
+        private void rotationRight_Click_1(object sender, EventArgs e)
+        {
+            List<double> center = rabbit.getCenter();
+            rabbit.move(center[0] * -1, center[1] * -1);
+            rabbit.rotation(-0.35);
+            rabbit.move(center[0], center[1]);
+            paintPanel.Invalidate();
+        }
+
+        private void zoomIn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
