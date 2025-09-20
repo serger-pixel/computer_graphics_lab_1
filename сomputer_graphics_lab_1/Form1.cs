@@ -28,61 +28,131 @@ namespace сomputer_graphics_lab_1
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
-            rabbit.move(10, 0);
+            String text = null;
+            foreach (Control ctrl in groupBox1.Controls)
+            {
+                if (ctrl is RadioButton rb && rb.Checked)
+                {
+                    text = rb.Text;
+                }
+            }
+            switch (text)
+            {
+                case "X":
+                    rabbit.move(10, 0, 0);
+                    break;
+                case "Y":
+                    rabbit.move(0, 10, 0);
+                    break;
+                case "Z":
+                    rabbit.move(0, 0, 10);
+                    break;
+                default:
+                    break;
+            }
             paintPanel.Invalidate();
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
-            rabbit.move(-10, 0);
-            paintPanel.Invalidate();
-        }
-
-        private void buttonUp_Click(object sender, EventArgs e)
-        {
-            rabbit.move(0, -10);
-            paintPanel.Invalidate();
-        }
-
-        private void buttonDown_Click(object sender, EventArgs e)
-        {
-            rabbit.move(0, 10);
+            String text = null;
+            foreach (Control ctrl in groupBox1.Controls)
+            {
+                if (ctrl is RadioButton rb && rb.Checked)
+                {
+                    text = rb.Text;
+                }
+            }
+            switch (text) 
+            {
+                case "X":
+                    rabbit.move(-10, 0, 0);
+                    break;
+                case "Y":
+                    rabbit.move(0, -10, 0);
+                    break;
+                case "Z":
+                    rabbit.move(0, 0, -10);
+                    break;
+                default:
+                   break; 
+            }
             paintPanel.Invalidate();
         }
 
         private void rotationLeft_Click(object sender, EventArgs e)
         {
+            String text = null;
+            foreach (Control ctrl in groupBox2.Controls)
+            {
+                if (ctrl is RadioButton rb && rb.Checked)
+                {
+                    text = rb.Text;
+                }
+            }
             List<double> center = rabbit.getCenter();
-            rabbit.move(center[0] * -1, center[1] * -1);
-            rabbit.rotation(0.35);
-            rabbit.move(center[0], center[1]);
+            rabbit.move(center[0] * -1, center[1] * -1, center[2] * -1);
+            switch (text)
+            {
+                case "X":
+                    rabbit.rotationYZ(0.35);
+                    break;
+                case "Y":
+                    rabbit.rotationXZ(0.35);
+                    break;
+                case "Z":
+                    rabbit.rotationXY(0.35);
+                    break;
+                default:
+                    break;
+            }
             paintPanel.Invalidate();
         }
 
         private void rotationRight_Click(object sender, EventArgs e)
         {
+            String text = null;
+            foreach (Control ctrl in groupBox2.Controls)
+            {
+                if (ctrl is RadioButton rb && rb.Checked)
+                {
+                    text = rb.Text;
+                }
+            }
             List<double> center = rabbit.getCenter();
-            rabbit.move(center[0] * -1, center[1] * -1);
-            rabbit.rotation(-0.35);
-            rabbit.move(center[0], center[1]);
+            rabbit.move(center[0] * -1, center[1] * -1, center[2] * -1);
+            switch (text)
+            {
+                case "X":
+                    rabbit.rotationYZ(-0.35);
+                    break;
+                case "Y":
+                    rabbit.rotationXZ(-0.35);
+                    break;
+                case "Z":
+                    rabbit.rotationXY(-0.35);
+                    break;
+                default:
+                    break;
+            }
             paintPanel.Invalidate();
         }
 
         private void zoomIn_Click(object sender, EventArgs e)
         {
             List<double> center = rabbit.getCenter();
-            rabbit.move(center[0] * -1, center[1] * -1);
-            rabbit.zoom(1.5, 1.5);
-            rabbit.move(center[0], center[1]);
+            rabbit.move(center[0] * -1, center[1] * -1, center[2] * -1);
+            rabbit.zoom(1.5, 1.5, 1.5);
+            rabbit.move(center[0], center[1], center[2]);
             paintPanel.Invalidate();
         }
 
         private void zoomOut_Click(object sender, EventArgs e)
         {
             List<double> center = rabbit.getCenter();
-            rabbit.move(center[0] * -1, center[1] * -1);
-            rabbit.zoom(0.6, 0.6);
-            rabbit.move(center[0], center[1]);
+            rabbit.move(center[0] * -1, center[1] * -1, center[2] * -1);
+            rabbit.zoom(0.6, 0.6, 0.6);
+            rabbit.move(center[0], center[1], center[2]);
             paintPanel.Invalidate();
         }
 

@@ -60,54 +60,72 @@ namespace сomputer_graphics_lab_1
 
     }
 
-    public class rotationMatrix : Matrix<double>
+    public class rotationMatrixXY : Matrix<double>
     {
-        public rotationMatrix(double angle) : base(3, 3)
+        public rotationMatrixXY(double angle) : base(4, 4)
         {
             double sinAngle = Math.Sin(angle);
             double cosAngle = Math.Cos(angle);
             innerMatrix[0][0] = cosAngle;
             innerMatrix[0][1] = sinAngle;
-            innerMatrix[0][2] = 0;
             innerMatrix[1][0] = -sinAngle;
             innerMatrix[1][1] = cosAngle;
-            innerMatrix[1][2] = 0;
-            innerMatrix[2][0] = 0;
-            innerMatrix[2][1] = 0;
             innerMatrix[2][2] = 1;
+        }
+    }
 
+    public class rotationMatrixXZ : Matrix<double>
+    {
+        public rotationMatrixXZ(double angle) : base(4, 4)
+        {
+            double sinAngle = Math.Sin(angle);
+            double cosAngle = Math.Cos(angle);
+            innerMatrix[0][0] = cosAngle;
+            innerMatrix[0][2] = -sinAngle;
+            innerMatrix[2][0] = sinAngle;
+            innerMatrix[2][2] = cosAngle;
+            innerMatrix[1][1] = 1;
+            innerMatrix[3][3] = 1;
+        }
+    }
+
+    public class rotationMatrixYZ : Matrix<double>
+    {
+        public rotationMatrixYZ(double angle) : base(4, 4)
+        {
+            double sinAngle = Math.Sin(angle);
+            double cosAngle = Math.Cos(angle);
+            innerMatrix[0][0] = 1;
+            innerMatrix[1][2] = cosAngle;
+            innerMatrix[1][3] = sinAngle;
+            innerMatrix[2][1] = -sinAngle;
+            innerMatrix[2][2] = cosAngle;
+            innerMatrix[3][3] = 1;
         }
     }
 
     public class dilatationMatrix : Matrix<double>
     {
-        public dilatationMatrix(double a, double b) : base(3, 3)
+        public dilatationMatrix(double Sx, double Sy, double Sz) : base(4, 4)
         {
-            innerMatrix[0][0] = a;
-            innerMatrix[0][1] = 0;
-            innerMatrix[0][2] = 0;
-            innerMatrix[1][0] = 0;
-            innerMatrix[1][1] = b;
-            innerMatrix[1][2] = 0;
-            innerMatrix[2][0] = 0;
-            innerMatrix[2][1] = 0;
-            innerMatrix[2][2] = 1;
+            innerMatrix[0][0] = Sx;
+            innerMatrix[1][1] = Sy;
+            innerMatrix[2][2] = Sz;
+            innerMatrix[3][3] = 1;
         }
     }
 
     public class translationMatrix : Matrix<double>
     {
-        public translationMatrix(double a, double b) : base(3, 3)
+        public translationMatrix(double Dx, double Dy, double Dz) : base(4, 4)
         {
             innerMatrix[0][0] = 1;
-            innerMatrix[0][1] = 0;
-            innerMatrix[0][2] = 0;
-            innerMatrix[1][0] = 0;
             innerMatrix[1][1] = 1;
-            innerMatrix[1][2] = 0;
-            innerMatrix[2][0] = a;
-            innerMatrix[2][1] = b;
+            innerMatrix[3][0] = Dx;
+            innerMatrix[3][1] = Dy;
+            innerMatrix[3][2] = Dz;
             innerMatrix[2][2] = 1;
+            innerMatrix[3][3] = 1;
         }
     }
 }

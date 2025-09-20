@@ -173,22 +173,33 @@ namespace сomputer_graphics_lab_1
             return new List<double>() { coords[40, 0], coords[40, 1], coords[40, 2] };
         }
 
-        public void move(double a, double b)
+        public void move(double a, double b, double c)
         {
-            translationMatrix matrix = new translationMatrix(a, b);
+            translationMatrix matrix = new translationMatrix(a, b, c);
             coords = coords.multiplyMatrix(matrix);
         }
 
-        public void rotation(double a)
+        public void rotationXY(double a) 
         {
-            rotationMatrix matrix = new rotationMatrix(a);
+            rotationMatrixXY matrix = new rotationMatrixXY(a);
             coords = coords.multiplyMatrix(matrix);
-
         }
 
-        public void zoom(double a, double b)
+        public void rotationXZ(double a)
         {
-            dilatationMatrix matrix = new dilatationMatrix(a, b);
+            rotationMatrixXZ matrix = new rotationMatrixXZ(a);
+            coords = coords.multiplyMatrix(matrix);
+        }
+
+        public void rotationYZ(double a)
+        {
+            rotationMatrixYZ matrix = new rotationMatrixYZ(a);
+            coords = coords.multiplyMatrix(matrix);
+        }
+
+        public void zoom(double a, double b, double c)
+        {
+            dilatationMatrix matrix = new dilatationMatrix(a, b, c);
             coords = coords.multiplyMatrix(matrix);
         }
     }
