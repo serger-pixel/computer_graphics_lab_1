@@ -16,9 +16,32 @@ namespace сomputer_graphics_lab_1
         private Graphics g;
         Pen pen = new Pen(Color.Black, 2);
 
+
         public Paint()
         {
-            coords = new Matrix<double>(41, 3);
+            coords = new Matrix<double>(70, 4);
+
+            for(int i = 0; i < 41; i++) 
+            {
+                coords[i, 3] = 4;
+            }
+
+            // Точки задней стороны
+            for (int i = 0, j = 41; i < 41; i++, j++)
+            {
+                if (i == 17 || i == 18 || i == 37 || i == 38 
+                   || i == 16 || i == 36 || i == 2 || i == 5 || i == 22 || i == 25 || i == 0)
+                {
+                    continue;
+                }
+
+                coords[j, 0] = coords[i, 0];
+                coords[j, 1] = coords[i, 1];
+                coords[j, 2] = -coords[i, 2];
+                coords[j, 3] = 1;
+            }
+
+
             coords[0, 0] = -1;
             coords[0, 1] = 20;
             coords[0, 2] = 1;
@@ -87,7 +110,8 @@ namespace сomputer_graphics_lab_1
             }
             coords[40, 0] = 0;
             coords[40, 1] = 0;
-            coords[40, 2] = 1;
+            coords[40, 2] = 0;
+            coords[40, 3] = 1;
 
 
             connections = new List<List<int>>();
@@ -111,6 +135,25 @@ namespace сomputer_graphics_lab_1
             connections.Add(new List<int>() { 20, 39 });
             connections.Add(new List<int>() { 0, 19 });
 
+            for (int i = 41; i < 69; i++) 
+            {
+                connections.Add(new List<int> { i, i + 1 });
+            }
+
+            for (int i = 0, step = 41; i < 18; i++) 
+            {
+                if (i == 2) { step = 37; i = 5; continue; }
+                connections.Add(new List<int>() { i, i + step });
+            }
+
+            for (int i = 20, step = 41; i < 36; i++) 
+            {
+                if (i == 22) { step = 37; i = 25; continue; }
+                connections.Add(new List<int>() { i, i + step });
+            }
+
+            connections.Add(new List<int>() { 19, 54 });
+            connections.Add(new List<int>() { 39, 69 });
         }
 
         public Matrix<double> transformMatrix(Panel paintPanel)
