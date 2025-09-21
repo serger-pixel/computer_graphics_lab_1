@@ -131,6 +131,7 @@ namespace сomputer_graphics_lab_1
                 default:
                     break;
             }
+            rabbit.move(center[0], center[1], center[2]);
             paintPanel.Invalidate();
         }
 
@@ -160,6 +161,7 @@ namespace сomputer_graphics_lab_1
                 default:
                     break;
             }
+            rabbit.move(center[0], center[1], center[2]);
             paintPanel.Invalidate();
         }
 

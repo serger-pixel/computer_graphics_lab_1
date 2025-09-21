@@ -37,7 +37,6 @@
             buttonLeft = new Button();
             buttonRight = new Button();
             groupBox1 = new GroupBox();
-            MoveZ = new RadioButton();
             MoveY = new RadioButton();
             MoveX = new RadioButton();
             groupBox2 = new GroupBox();
@@ -133,7 +132,6 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(MoveZ);
             groupBox1.Controls.Add(MoveY);
             groupBox1.Controls.Add(MoveX);
             groupBox1.Controls.Add(buttonRight);
@@ -144,18 +142,6 @@
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Перемещение";
-            // 
-            // MoveZ
-            // 
-            MoveZ.AutoSize = true;
-            MoveZ.Location = new Point(191, 140);
-            MoveZ.Margin = new Padding(4, 5, 4, 5);
-            MoveZ.Name = "MoveZ";
-            MoveZ.Size = new Size(47, 29);
-            MoveZ.TabIndex = 18;
-            MoveZ.TabStop = true;
-            MoveZ.Text = "Z";
-            MoveZ.UseVisualStyleBackColor = true;
             // 
             // MoveY
             // 
@@ -277,7 +263,6 @@
         private System.Windows.Forms.Button rotationRight;
         private System.Windows.Forms.Button zoomIn;
         private System.Windows.Forms.Button zoomOut;
-        private RadioButton MoveZ;
         private RadioButton MoveY;
         private RadioButton MoveX;
         private RadioButton RotationZ;

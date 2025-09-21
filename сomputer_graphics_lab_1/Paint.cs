@@ -160,6 +160,7 @@ namespace сomputer_graphics_lab_1
             front = front.multiplyMatrix(matrix);
             back = back.multiplyMatrix(matrix);
             face = face.multiplyMatrix(matrix);
+            center = center.multiplyMatrix(matrix);
 
         }
 
@@ -193,6 +194,7 @@ namespace сomputer_graphics_lab_1
             front = front.multiplyMatrix(matrix);
             back = back.multiplyMatrix(matrix);
             face = face.multiplyMatrix(matrix);
+            center = center.multiplyMatrix(matrix);
         }
     }
 }
