@@ -96,8 +96,8 @@ namespace сomputer_graphics_lab_1
             double sinAngle = Math.Sin(angle);
             double cosAngle = Math.Cos(angle);
             innerMatrix[0][0] = 1;
-            innerMatrix[1][2] = cosAngle;
-            innerMatrix[1][3] = sinAngle;
+            innerMatrix[1][1] = cosAngle;
+            innerMatrix[1][2] = sinAngle;
             innerMatrix[2][1] = -sinAngle;
             innerMatrix[2][2] = cosAngle;
             innerMatrix[3][3] = 1;

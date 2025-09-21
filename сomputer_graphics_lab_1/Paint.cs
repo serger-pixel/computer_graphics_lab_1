@@ -14,9 +14,10 @@ namespace сomputer_graphics_lab_1
         public Matrix<double> face;
         public Matrix<double> center;
 
-        public List<List<int>> connectionsFront;
-        public List<List<int>> connectionsBack;
+        public List<List<int>> connectionsBody;
         public List<List<int>> connectionsFace;
+        public List<List<int>> connectionsFrontBack;
+        
 
         public Paint()
         {
@@ -53,22 +54,24 @@ namespace сomputer_graphics_lab_1
             front[11, 1] = -12;
             front[12, 0] = -1;
             front[12, 1] = -7;
-            front[13, 0] = -1;
-            front[13, 1] = 9;
-            for (int i = 14; i < 28; i++)
+            front[26, 0] = 1;
+            front[26, 1] = 14;
+            front[27, 0] = -1;
+            front[27, 1] = 14;
+            for (int i = 13; i < 26; i++)
             {
-                front[i, 0] = front[i - 14, 0] * -1;
-                front[i, 1] = front[i - 14, 1];
+                front[i, 0] = front[25 - i, 0] * -1;
+                front[i, 1] = front[25 - i, 1];
             }
 
             //Создание задней стороны
             back = new Matrix<double>(28, 4);
             for (int i = 0; i < 28; i++)
             {
-                back[i, 0] = front[i, 2];
-                back[i, 1] = front[i, 3];
-                back[i, 3] = front[i, 2] * -1;
-                back[i, 2] = front[i, 3];
+                back[i, 0] = front[i, 0];
+                back[i, 1] = front[i, 1];
+                back[i, 2] = front[i, 2] * -1;
+                back[i, 3] = front[i, 3];
             }
 
             //Создание центра
@@ -82,8 +85,8 @@ namespace сomputer_graphics_lab_1
             face = new Matrix<double>(12, 4);
             for(int i = 0; i < 12; i++) 
             {
-                face[i, 3] = 4;
-                face[i, 4] = 1;
+                face[i, 2] = 4;
+                face[i, 3] = 1;
             }
             face[0, 0] = -3;
             face[0, 1] = 12;
@@ -102,33 +105,34 @@ namespace сomputer_graphics_lab_1
             face[8, 1] = 10;
             face[9, 0] = 1;
             face[9, 1] = 10;
-            face[10, 0] = -1;
+            face[10, 0] = 1;
             face[10, 1] = 9;
-            face[11, 0] = 1;
+            face[11, 0] = -1;
             face[11, 1] = 9;
 
-            //Соединения передней стороны
-            connectionsFront = new List<List<int>>();
+            //Соединения тела
+            connectionsBody = new List<List<int>>();
             for (int i = 0; i < 27; i++)
             {
-                connectionsFront.Add(new List<int>(){i, i+1});
+                connectionsBody.Add(new List<int>(){i, i+1});
             }
-
-            //Соединения задней стороны
-            connectionsBack = new List<List<int>>();
-            for (int i = 0; i < 27; i++)
-            {
-                connectionsBack.Add(new List<int>() { i, i + 1 });
-            }
+            connectionsBody.Add(new List<int>() { 27, 0 });
 
             //Соединения лица
             connectionsFace = new List<List<int>>();
-            for (int i = 0, j = 0 ; i < 11; i++, j++)
+            for (int i = 0;  i < 11; i++)
             {
-                if (j == 3) { j = 0;  continue; }
+                if (i % 4 == 3) { continue; }
                 connectionsFace.Add(new List<int>() { i, i + 1 });
             }
+            connectionsFace.Add(new List<int>() { 8, 11 });
 
+            //Соединения передней и задней стороны
+            connectionsFrontBack = new List<List<int>>();
+            for (int i = 0; i < 27; i++)
+            {
+                connectionsFrontBack.Add(new List<int>() { i, i});
+            }
 
         }
 
@@ -140,7 +144,8 @@ namespace сomputer_graphics_lab_1
             {
                 result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 0];
                 result[i, 1] = paintPanel.Height / 2 - zoomPix* matrix[i, 1];
-                result[i, 2] = 1;
+                result[i, 2] = zoomPix * matrix[i, 2];
+                result[i, 3] = 1;
             }
             return result;
         }

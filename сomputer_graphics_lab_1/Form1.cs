@@ -20,13 +20,28 @@ namespace сomputer_graphics_lab_1
             }
         }
 
+        private void paintDots(List<List<int>> connections, Matrix<double> dots1, Matrix<double> dots2, Graphics g, Pen pen)
+        {
+            Matrix<double> displayMatrix1 = rabbit.transformMatrix(paintPanel, dots1);
+            Matrix<double> displayMatrix2 = rabbit.transformMatrix(paintPanel, dots2);
+            for (int i = 0; i < connections.Count; i++)
+            {
+                int x1 = (int)displayMatrix1[connections[i][0], 0] + 1;
+                int y1 = (int)displayMatrix1[connections[i][0], 1] + 1;
+                int x2 = (int)displayMatrix2[connections[i][1], 0] + 1;
+                int y2 = (int)displayMatrix2[connections[i][1], 1] + 1;
+                g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
+            }
+        }
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Pen pen = new Pen(Color.Blue, 5);
-            paintDots(rabbit.connectionsFront, rabbit.front, g, pen);
-            paintDots(rabbit.connectionsBack, rabbit.back, g, pen);
+            paintDots(rabbit.connectionsBody, rabbit.front, g, pen);
+            paintDots(rabbit.connectionsBody, rabbit.back, g, pen);
             paintDots(rabbit.connectionsFace, rabbit.face, g, pen);
+            paintDots(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
         }
 
         public Form1()
