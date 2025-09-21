@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace сomputer_graphics_lab_1
@@ -23,7 +24,9 @@ namespace сomputer_graphics_lab_1
         {
             Graphics g = e.Graphics;
             Pen pen = new Pen(Color.Blue, 5);
-            
+            paintDots(rabbit.connectionsFront, rabbit.front, g, pen);
+            paintDots(rabbit.connectionsBack, rabbit.back, g, pen);
+            paintDots(rabbit.connectionsFace, rabbit.face, g, pen);
         }
 
         public Form1()
