@@ -132,14 +132,14 @@ namespace сomputer_graphics_lab_1
 
         }
 
-        public Matrix<double> transformMatrix(Panel paintPanel)
+        public Matrix<double> transformMatrix(Panel paintPanel, Matrix<double> matrix)
         {
-            Matrix<double> result = new Matrix<double>(front.getRows(), front.getCols());
+            Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
             const int zoomPix = 10;
-            for (int i = 0; i < front.getRows(); i++)
+            for (int i = 0; i < matrix.getRows(); i++)
             {
-                result[i, 0] = paintPanel.Width / 2 + zoomPix * front[i, 0];
-                result[i, 1] = paintPanel.Height / 2 - zoomPix* front[i, 1];
+                result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 0];
+                result[i, 1] = paintPanel.Height / 2 - zoomPix* matrix[i, 1];
                 result[i, 2] = 1;
             }
             return result;
