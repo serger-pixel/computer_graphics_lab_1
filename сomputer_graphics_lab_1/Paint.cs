@@ -146,37 +146,48 @@ namespace сomputer_graphics_lab_1
         }
         public List<double> getCenter()
         {
-            return new List<double>() { front[40, 0], front[40, 1], front[40, 2] };
+            return new List<double>() { center[0, 0], center[0, 1], center[0, 2], center[0, 3]  };
         }
 
         public void move(double a, double b, double c)
         {
             translationMatrix matrix = new translationMatrix(a, b, c);
             front = front.multiplyMatrix(matrix);
+            back = back.multiplyMatrix(matrix);
+            face = face.multiplyMatrix(matrix);
+
         }
 
         public void rotationXY(double a) 
         {
             rotationMatrixXY matrix = new rotationMatrixXY(a);
             front = front.multiplyMatrix(matrix);
+            back = back.multiplyMatrix(matrix);
+            face = face.multiplyMatrix(matrix);
         }
 
         public void rotationXZ(double a)
         {
             rotationMatrixXZ matrix = new rotationMatrixXZ(a);
             front = front.multiplyMatrix(matrix);
+            back = back.multiplyMatrix(matrix);
+            face = face.multiplyMatrix(matrix);
         }
 
         public void rotationYZ(double a)
         {
             rotationMatrixYZ matrix = new rotationMatrixYZ(a);
             front = front.multiplyMatrix(matrix);
+            back = back.multiplyMatrix(matrix);
+            face = face.multiplyMatrix(matrix);
         }
 
         public void zoom(double a, double b, double c)
         {
             dilatationMatrix matrix = new dilatationMatrix(a, b, c);
             front = front.multiplyMatrix(matrix);
+            back = back.multiplyMatrix(matrix);
+            face = face.multiplyMatrix(matrix);
         }
     }
 }
