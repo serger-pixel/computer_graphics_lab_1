@@ -9,10 +9,10 @@ namespace сomputer_graphics_lab_1
 {
     class Paint
     {
-        private Matrix<double> front;
-        private Matrix<double> back;
-        private Matrix<double> face;
-        private Matrix<double> center;
+        public Matrix<double> front;
+        public Matrix<double> back;
+        public Matrix<double> face;
+        public Matrix<double> center;
 
         public List<List<int>> connectionsFront;
         public List<List<int>> connectionsBack;
