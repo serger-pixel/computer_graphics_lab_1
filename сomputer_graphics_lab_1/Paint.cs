@@ -149,6 +149,24 @@ namespace сomputer_graphics_lab_1
             }
             return result;
         }
+
+        public Matrix<double> transformPrXMatrix(Panel paintPanel, Matrix<double> matrix)
+        {
+            Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
+            const int zoomPix = 5;
+            for (int i = 0; i < matrix.getRows(); i++)
+            {
+                result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 0];
+                result[i, 1] = paintPanel.Height / 2 + zoomPix * matrix[i, 1];
+                result[i, 2] = paintPanel.Width / 2 + zoomPix * matrix[i, 2];
+                result[i, 3] = 1;
+            }
+            return result;
+        }
+
+
+
+
         public List<double> getCenter()
         {
             return new List<double>() { center[0, 0], center[0, 1], center[0, 2], center[0, 3]  };
@@ -200,9 +218,9 @@ namespace сomputer_graphics_lab_1
         public (Matrix<double>, Matrix<double>) ProjectOnX()
         {
             ProjectionMatrixX matrixX = new ProjectionMatrixX();
-            Matrix<double> FaceProjection = front.multiplyMatrix(matrixX);
+            Matrix<double> FrontProjection = front.multiplyMatrix(matrixX);
             Matrix<double> BackProjection = back.multiplyMatrix(matrixX);
-            return (FaceProjection, BackProjection);
+            return (FrontProjection, BackProjection);
         }
 
         public void ProjectOnY()

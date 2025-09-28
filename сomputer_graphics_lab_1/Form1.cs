@@ -5,8 +5,6 @@ namespace сomputer_graphics_lab_1
 {
     public partial class Form1 : Form
     {
-        Graphics g;
-        private Pen pen;
         Paint rabbit = new Paint();
 
         private void paintDots(List<List<int>> connections, Matrix<double> dots, Graphics g, Pen pen)
@@ -38,12 +36,23 @@ namespace сomputer_graphics_lab_1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            g = e.Graphics;
-            pen = new Pen(Color.Blue, 5);
+            Graphics g = e.Graphics;
+            Pen pen = new Pen(Color.Blue, 5);
             paintDots(rabbit.connectionsBody, rabbit.front, g, pen);
             paintDots(rabbit.connectionsBody, rabbit.back, g, pen);
             paintDots(rabbit.connectionsFace, rabbit.face, g, pen);
             paintDots(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
+        }
+
+        private void FormProjections_Paint(object sender, PaintEventArgs e) 
+        {
+            Graphics g = e.Graphics;
+            Pen pen = new Pen(Color.Blue, 5);
+
+            PaintProjectionDots(rabbit.ProjectOnX().Item1, rabbit.connectionsBody, g, pen);
+            PaintProjectionDots(rabbit.ProjectOnX().Item2, rabbit.connectionsBody, g, pen);
+            PaintProjectionDots(rabbit.ProjectOnX().Item1, rabbit.ProjectOnX().Item2, rabbit.connectionsFrontBack, g, pen);
+
         }
 
         public Form1()
@@ -51,6 +60,7 @@ namespace сomputer_graphics_lab_1
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             InitializeComponent();
             paintPanel.Paint += Form1_Paint;
+            projectionPanel.Paint += FormProjections_Paint;
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
@@ -187,35 +197,37 @@ namespace сomputer_graphics_lab_1
 
         private void button1_Click(object sender, EventArgs e)=> Application.Exit();
 
-        private void PaintProjectionDots(Matrix<double>m1,Matrix<double>m2)
-        {
-            Matrix<double>displayProjFront=rabbit.transformMatrix(projectionPanel,m1);
-            Matrix<double>displayProjBack=rabbit.transformMatrix(projectionPanel,m2);
-            for (int i = 0; i < displayProjFront.getRows()-1; i++)
-            {
-                int x1 = (int)displayProjFront[i,0] + 1;
-                int y1 = (int)displayProjFront[i,1] + 1;
-                int x2 = (int)displayProjFront[i+1,0] + 1;
-                int y2 = (int)displayProjFront[i+1,1] + 1;
-                g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
-            }
 
-            for (int j = 0; j < displayProjBack.getRows() - 1; j++)
+        private void PaintProjectionDots(Matrix<double> m, List<List<int>> connections, Graphics g, Pen pen) 
+        {
+            Matrix<double> displayMatrix = rabbit.transformPrXMatrix(projectionPanel, m);
+            for (int i = 0; i < connections.Count; i++)
             {
-                int x1 = (int)displayProjBack[j, 0] + 1;
-                int y1 = (int)displayProjBack[j, 1] + 1;
-                int x2 = (int)displayProjBack[j+1, 0] + 1;
-                int y2 = (int)displayProjBack[j + 1, 1] + 1;
+                int x1 = (int)displayMatrix[connections[i][0], 2] + 1;
+                int y1 = (int)displayMatrix[connections[i][0], 1] + 1;
+                int x2 = (int)displayMatrix[connections[i][1], 2] + 1;
+                int y2 = (int)displayMatrix[connections[i][1], 1] + 1;
                 g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
             }
-            projectionPanel.Invalidate();
+        }
+
+        private void PaintProjectionDots(Matrix<double>m1,Matrix<double>m2, List<List<int>> connections, Graphics g, Pen pen)
+        {
+            Matrix<double>displayProjFront=rabbit.transformPrXMatrix(projectionPanel,m1);
+            Matrix<double>displayProjBack=rabbit.transformPrXMatrix(projectionPanel,m2);
+            for (int i = 0; i < connections.Count; i++)
+            {
+                int x1 = (int)displayProjFront[connections[i][0], 2] + 1;
+                int y1 = (int)displayProjFront[connections[i][0], 1] + 1;
+                int x2 = (int)displayProjBack[connections[i][1], 2] + 1;
+                int y2 = (int)displayProjBack[connections[i][1], 1] + 1;
+                g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
+            }
         }
 
         private void projectionX_Click(object sender, EventArgs e)
         {
-            Matrix<double> matrix1 =rabbit.ProjectOnX().Item1;
-            Matrix<double>matrix2=rabbit.ProjectOnX().Item2;
-            PaintProjectionDots(matrix1,matrix2);
+            projectionPanel.Invalidate();
         }
     }
 }
