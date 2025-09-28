@@ -196,5 +196,21 @@ namespace сomputer_graphics_lab_1
             face = face.multiplyMatrix(matrix);
             center = center.multiplyMatrix(matrix);
         }
+
+        public (Matrix<double>, Matrix<double>) ProjectOnX()
+        {
+            ProjectionMatrixX matrixX = new ProjectionMatrixX();
+            Matrix<double> FaceProjection = front.multiplyMatrix(matrixX);
+            Matrix<double> BackProjection = back.multiplyMatrix(matrixX);
+            return (FaceProjection, BackProjection);
+        }
+
+        public void ProjectOnY()
+        {
+        }
+
+        public void ProjectOnZ()
+        {
+        }
     }
 }

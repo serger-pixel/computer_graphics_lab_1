@@ -28,42 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            paintPanel = new Panel();
-            rotationLeft = new Button();
-            rotationRight = new Button();
-            zoomIn = new Button();
-            zoomOut = new Button();
-            button1 = new Button();
-            buttonLeft = new Button();
-            buttonRight = new Button();
-            groupBox1 = new GroupBox();
-            MoveY = new RadioButton();
-            MoveX = new RadioButton();
-            groupBox2 = new GroupBox();
-            RotationZ = new RadioButton();
-            RotationY = new RadioButton();
-            RotationX = new RadioButton();
-            groupBox3 = new GroupBox();
+            paintPanel = new System.Windows.Forms.Panel();
+            rotationLeft = new System.Windows.Forms.Button();
+            rotationRight = new System.Windows.Forms.Button();
+            zoomIn = new System.Windows.Forms.Button();
+            zoomOut = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
+            buttonLeft = new System.Windows.Forms.Button();
+            buttonRight = new System.Windows.Forms.Button();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            MoveY = new System.Windows.Forms.RadioButton();
+            MoveX = new System.Windows.Forms.RadioButton();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            RotationZ = new System.Windows.Forms.RadioButton();
+            RotationY = new System.Windows.Forms.RadioButton();
+            RotationX = new System.Windows.Forms.RadioButton();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            projectionPanel = new System.Windows.Forms.Panel();
+            groupBox4 = new System.Windows.Forms.GroupBox();
+            projectionZ = new System.Windows.Forms.Button();
+            projectionY = new System.Windows.Forms.Button();
+            projectionX = new System.Windows.Forms.Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // paintPanel
             // 
-            paintPanel.BackColor = SystemColors.ButtonFace;
-            paintPanel.BorderStyle = BorderStyle.FixedSingle;
-            paintPanel.ForeColor = SystemColors.ControlDark;
-            paintPanel.Location = new Point(1, 2);
+            paintPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            paintPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            paintPanel.ForeColor = System.Drawing.SystemColors.ControlDark;
+            paintPanel.Location = new System.Drawing.Point(1, 2);
             paintPanel.Name = "paintPanel";
-            paintPanel.Size = new Size(1215, 480);
+            paintPanel.Size = new System.Drawing.Size(1215, 412);
             paintPanel.TabIndex = 0;
             // 
             // rotationLeft
             // 
-            rotationLeft.Location = new Point(26, 38);
+            rotationLeft.Location = new System.Drawing.Point(60, 30);
             rotationLeft.Name = "rotationLeft";
-            rotationLeft.Size = new Size(111, 63);
+            rotationLeft.Size = new System.Drawing.Size(73, 55);
             rotationLeft.TabIndex = 4;
             rotationLeft.Text = "<";
             rotationLeft.UseVisualStyleBackColor = true;
@@ -71,9 +77,9 @@
             // 
             // rotationRight
             // 
-            rotationRight.Location = new Point(177, 38);
+            rotationRight.Location = new System.Drawing.Point(154, 30);
             rotationRight.Name = "rotationRight";
-            rotationRight.Size = new Size(111, 63);
+            rotationRight.Size = new System.Drawing.Size(84, 55);
             rotationRight.TabIndex = 5;
             rotationRight.Text = ">";
             rotationRight.UseVisualStyleBackColor = true;
@@ -81,9 +87,9 @@
             // 
             // zoomIn
             // 
-            zoomIn.Location = new Point(31, 35);
+            zoomIn.Location = new System.Drawing.Point(31, 35);
             zoomIn.Name = "zoomIn";
-            zoomIn.Size = new Size(59, 48);
+            zoomIn.Size = new System.Drawing.Size(59, 48);
             zoomIn.TabIndex = 6;
             zoomIn.Text = "+";
             zoomIn.UseVisualStyleBackColor = true;
@@ -91,10 +97,10 @@
             // 
             // zoomOut
             // 
-            zoomOut.BackgroundImageLayout = ImageLayout.Center;
-            zoomOut.Location = new Point(123, 35);
+            zoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            zoomOut.Location = new System.Drawing.Point(123, 35);
             zoomOut.Name = "zoomOut";
-            zoomOut.Size = new Size(59, 48);
+            zoomOut.Size = new System.Drawing.Size(59, 48);
             zoomOut.TabIndex = 7;
             zoomOut.Text = "-";
             zoomOut.UseVisualStyleBackColor = true;
@@ -102,9 +108,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(1096, 547);
+            button1.Location = new System.Drawing.Point(1088, 861);
             button1.Name = "button1";
-            button1.Size = new Size(121, 47);
+            button1.Size = new System.Drawing.Size(121, 47);
             button1.TabIndex = 8;
             button1.Text = "Выход";
             button1.UseVisualStyleBackColor = true;
@@ -112,9 +118,9 @@
             // 
             // buttonLeft
             // 
-            buttonLeft.Location = new Point(28, 40);
+            buttonLeft.Location = new System.Drawing.Point(47, 27);
             buttonLeft.Name = "buttonLeft";
-            buttonLeft.Size = new Size(79, 53);
+            buttonLeft.Size = new System.Drawing.Size(79, 53);
             buttonLeft.TabIndex = 1;
             buttonLeft.Text = "<";
             buttonLeft.UseVisualStyleBackColor = true;
@@ -122,9 +128,9 @@
             // 
             // buttonRight
             // 
-            buttonRight.Location = new Point(170, 38);
+            buttonRight.Location = new System.Drawing.Point(164, 27);
             buttonRight.Name = "buttonRight";
-            buttonRight.Size = new Size(90, 58);
+            buttonRight.Size = new System.Drawing.Size(90, 58);
             buttonRight.TabIndex = 1;
             buttonRight.Text = ">";
             buttonRight.UseVisualStyleBackColor = true;
@@ -136,9 +142,9 @@
             groupBox1.Controls.Add(MoveX);
             groupBox1.Controls.Add(buttonRight);
             groupBox1.Controls.Add(buttonLeft);
-            groupBox1.Location = new Point(50, 483);
+            groupBox1.Location = new System.Drawing.Point(52, 420);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(285, 193);
+            groupBox1.Size = new System.Drawing.Size(285, 122);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Перемещение";
@@ -146,10 +152,10 @@
             // MoveY
             // 
             MoveY.AutoSize = true;
-            MoveY.Location = new Point(122, 140);
-            MoveY.Margin = new Padding(4, 5, 4, 5);
+            MoveY.Location = new System.Drawing.Point(144, 93);
+            MoveY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             MoveY.Name = "MoveY";
-            MoveY.Size = new Size(47, 29);
+            MoveY.Size = new System.Drawing.Size(47, 29);
             MoveY.TabIndex = 17;
             MoveY.TabStop = true;
             MoveY.Text = "Y";
@@ -158,10 +164,10 @@
             // MoveX
             // 
             MoveX.AutoSize = true;
-            MoveX.Location = new Point(59, 140);
-            MoveX.Margin = new Padding(4, 5, 4, 5);
+            MoveX.Location = new System.Drawing.Point(88, 93);
+            MoveX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             MoveX.Name = "MoveX";
-            MoveX.Size = new Size(48, 29);
+            MoveX.Size = new System.Drawing.Size(48, 29);
             MoveX.TabIndex = 16;
             MoveX.TabStop = true;
             MoveX.Text = "X";
@@ -174,9 +180,9 @@
             groupBox2.Controls.Add(RotationX);
             groupBox2.Controls.Add(rotationRight);
             groupBox2.Controls.Add(rotationLeft);
-            groupBox2.Location = new Point(421, 483);
+            groupBox2.Location = new System.Drawing.Point(399, 427);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(313, 193);
+            groupBox2.Size = new System.Drawing.Size(313, 130);
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Поворот";
@@ -184,10 +190,10 @@
             // RotationZ
             // 
             RotationZ.AutoSize = true;
-            RotationZ.Location = new Point(209, 140);
-            RotationZ.Margin = new Padding(4, 5, 4, 5);
+            RotationZ.Location = new System.Drawing.Point(191, 93);
+            RotationZ.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             RotationZ.Name = "RotationZ";
-            RotationZ.Size = new Size(47, 29);
+            RotationZ.Size = new System.Drawing.Size(47, 29);
             RotationZ.TabIndex = 21;
             RotationZ.TabStop = true;
             RotationZ.Text = "Z";
@@ -196,10 +202,10 @@
             // RotationY
             // 
             RotationY.AutoSize = true;
-            RotationY.Location = new Point(126, 140);
-            RotationY.Margin = new Padding(4, 5, 4, 5);
+            RotationY.Location = new System.Drawing.Point(126, 93);
+            RotationY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             RotationY.Name = "RotationY";
-            RotationY.Size = new Size(47, 29);
+            RotationY.Size = new System.Drawing.Size(47, 29);
             RotationY.TabIndex = 20;
             RotationY.TabStop = true;
             RotationY.Text = "Y";
@@ -208,10 +214,10 @@
             // RotationX
             // 
             RotationX.AutoSize = true;
-            RotationX.Location = new Point(51, 140);
-            RotationX.Margin = new Padding(4, 5, 4, 5);
+            RotationX.Location = new System.Drawing.Point(60, 93);
+            RotationX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             RotationX.Name = "RotationX";
-            RotationX.Size = new Size(48, 29);
+            RotationX.Size = new System.Drawing.Size(48, 29);
             RotationX.TabIndex = 19;
             RotationX.TabStop = true;
             RotationX.Text = "X";
@@ -221,32 +227,92 @@
             // 
             groupBox3.Controls.Add(zoomOut);
             groupBox3.Controls.Add(zoomIn);
-            groupBox3.Location = new Point(851, 488);
+            groupBox3.Location = new System.Drawing.Point(788, 435);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(201, 107);
+            groupBox3.Size = new System.Drawing.Size(201, 122);
             groupBox3.TabIndex = 12;
             groupBox3.TabStop = false;
             groupBox3.Text = "Масштаб";
             // 
+            // projectionPanel
+            // 
+            projectionPanel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            projectionPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            projectionPanel.ForeColor = System.Drawing.SystemColors.ControlDark;
+            projectionPanel.Location = new System.Drawing.Point(1, 563);
+            projectionPanel.Name = "projectionPanel";
+            projectionPanel.Size = new System.Drawing.Size(1215, 279);
+            projectionPanel.TabIndex = 1;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(projectionZ);
+            groupBox4.Controls.Add(projectionY);
+            groupBox4.Controls.Add(projectionX);
+            groupBox4.Location = new System.Drawing.Point(441, 848);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new System.Drawing.Size(313, 75);
+            groupBox4.TabIndex = 22;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Проекции";
+            // 
+            // projectionZ
+            // 
+            projectionZ.Location = new System.Drawing.Point(181, 30);
+            projectionZ.Name = "projectionZ";
+            projectionZ.Size = new System.Drawing.Size(45, 40);
+            projectionZ.TabIndex = 25;
+            projectionZ.Text = "Z";
+            projectionZ.UseVisualStyleBackColor = true;
+            // 
+            // projectionY
+            // 
+            projectionY.Location = new System.Drawing.Point(112, 30);
+            projectionY.Name = "projectionY";
+            projectionY.Size = new System.Drawing.Size(45, 40);
+            projectionY.TabIndex = 24;
+            projectionY.Text = "Y";
+            projectionY.UseVisualStyleBackColor = true;
+            // 
+            // projectionX
+            // 
+            projectionX.Location = new System.Drawing.Point(35, 30);
+            projectionX.Name = "projectionX";
+            projectionX.Size = new System.Drawing.Size(47, 39);
+            projectionX.TabIndex = 23;
+            projectionX.Text = "X";
+            projectionX.UseVisualStyleBackColor = true;
+            projectionX.Click += projectionX_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1221, 695);
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1221, 950);
+            Controls.Add(groupBox4);
+            Controls.Add(projectionPanel);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button1);
             Controls.Add(paintPanel);
-            Name = "Form1";
             Text = "Лабораторная работа_КГ";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
+            groupBox4.ResumeLayout(false);
             ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button projectionX;
+        private System.Windows.Forms.Button projectionY;
+        private System.Windows.Forms.Button projectionZ;
+
+        private System.Windows.Forms.GroupBox groupBox4;
+
+        private System.Windows.Forms.Panel projectionPanel;
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -263,10 +329,10 @@
         private System.Windows.Forms.Button rotationRight;
         private System.Windows.Forms.Button zoomIn;
         private System.Windows.Forms.Button zoomOut;
-        private RadioButton MoveY;
-        private RadioButton MoveX;
-        private RadioButton RotationZ;
-        private RadioButton RotationY;
-        private RadioButton RotationX;
+        private System.Windows.Forms.RadioButton MoveY;
+        private System.Windows.Forms.RadioButton MoveX;
+        private System.Windows.Forms.RadioButton RotationZ;
+        private System.Windows.Forms.RadioButton RotationY;
+        private System.Windows.Forms.RadioButton RotationX;
     }
 }

@@ -11,7 +11,6 @@ namespace сomputer_graphics_lab_1
     public class Matrix<T> where T : INumber<T>
     {
         protected List<List<T>> innerMatrix;
-
         public int getRows() => innerMatrix.Count;
 
         public int getCols() => innerMatrix[0].Count;
@@ -126,6 +125,32 @@ namespace сomputer_graphics_lab_1
             innerMatrix[3][2] = Dz;
             innerMatrix[2][2] = 1;
             innerMatrix[3][3] = 1;
+        }
+    }
+
+    public class ProjectionMatrixX: Matrix<double>
+    {
+        public ProjectionMatrixX() : base(4, 4)
+        {
+            for(int i=1;i<4;i++) innerMatrix[i][i]=1;
+        }
+    }
+    
+    public class ProjectionMatrixY: Matrix<double>
+    {
+        public ProjectionMatrixY() : base(4, 4)
+        {
+            for(int i=0;i<4;i++) innerMatrix[i][i]=1;
+            innerMatrix[1][1] = 0;
+        }
+    }
+    
+    public class ProjectionMatrixZ: Matrix<double>
+    {
+        public ProjectionMatrixZ() : base(4, 4)
+        {
+            for(int i=0;i<4;i++) innerMatrix[i][i]=1;
+            innerMatrix[2][2]=0;
         }
     }
 }
