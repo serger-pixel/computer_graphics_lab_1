@@ -70,6 +70,7 @@ namespace сomputer_graphics_lab_1
             innerMatrix[1][0] = -sinAngle;
             innerMatrix[1][1] = cosAngle;
             innerMatrix[2][2] = 1;
+            innerMatrix[3][3] = 1;
         }
     }
 
