@@ -177,8 +177,8 @@ namespace сomputer_graphics_lab_1
                 case Plane.Y:
                     for (int i = 0; i < matrix.getRows(); i++)
                     {
-                        result[i, 1] = paintPanel.Height / 2 + zoomPix * matrix[i, 1];
                         result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 2];
+                        result[i, 1] = paintPanel.Height / 2 + zoomPix * matrix[i, 1];
                         result[i, 3] = 1;
                     }
                     break;
