@@ -7,6 +7,14 @@ using System.Drawing;
 
 namespace сomputer_graphics_lab_1
 {
+    //Перечисления для проекция
+    enum Plane
+    {
+        X,
+        Y,
+        Z
+    }
+
     class Paint
     {
         public Matrix<double> front;
@@ -150,16 +158,34 @@ namespace сomputer_graphics_lab_1
             return result;
         }
 
-        public Matrix<double> transformPrXMatrix(Panel paintPanel, Matrix<double> matrix)
+
+        //Перевод из мировых в экранные координаты в зависимости от плоскости
+        public Matrix<double>? transformPrXMatrix(Panel paintPanel, Matrix<double> matrix, Plane p)
         {
             Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
             const int zoomPix = 5;
-            for (int i = 0; i < matrix.getRows(); i++)
+            switch (p)
             {
-                result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 0];
-                result[i, 1] = paintPanel.Height / 2 + zoomPix * matrix[i, 1];
-                result[i, 2] = paintPanel.Width / 2 + zoomPix * matrix[i, 2];
-                result[i, 3] = 1;
+                case Plane.X:
+                    for (int i = 0; i < matrix.getRows(); i++)
+                    {
+                        result[i, 1] = paintPanel.Height / 2 + zoomPix * matrix[i, 1];
+                        result[i, 2] = paintPanel.Width / 2 + zoomPix * matrix[i, 2];
+                        result[i, 3] = 1;
+                    }
+                    break;
+                case Plane.Y:
+                    for (int i = 0; i < matrix.getRows(); i++)
+                    {
+                        result[i, 1] = paintPanel.Height / 2 + zoomPix * matrix[i, 1];
+                        result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 2];
+                        result[i, 3] = 1;
+                    }
+                    break;
+                case Plane.Z:
+                    result = transformMatrix(paintPanel, matrix);
+                    break;
+                default: break;
             }
             return result;
         }
@@ -215,12 +241,13 @@ namespace сomputer_graphics_lab_1
             center = center.multiplyMatrix(matrix);
         }
 
-        public (Matrix<double>, Matrix<double>) ProjectOnX()
+        public (Matrix<double>, Matrix<double>, Matrix<double>) ProjectOnX()
         {
             ProjectionMatrixX matrixX = new ProjectionMatrixX();
             Matrix<double> FrontProjection = front.multiplyMatrix(matrixX);
             Matrix<double> BackProjection = back.multiplyMatrix(matrixX);
-            return (FrontProjection, BackProjection);
+            Matrix<double> FaceProjection = face.multiplyMatrix(matrixX);
+            return (FrontProjection, BackProjection, FaceProjection);
         }
 
         public void ProjectOnY()
