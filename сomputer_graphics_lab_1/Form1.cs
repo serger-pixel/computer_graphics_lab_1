@@ -66,11 +66,11 @@ namespace сomputer_graphics_lab_1
             Matrix<double> displayMatrix = rabbit.transformPrXMatrix(paintPanel, dots, Plane.X);
             for (int i = 0; i < connections.Count; i++)
             {
-                int x1 = (int)displayMatrix[connections[i][0], 0] + 1;
                 int z1 = (int)displayMatrix[connections[i][0], 2] + 1;
-                int x2 = (int)displayMatrix[connections[i][1], 0] + 1;
+                int y1 = (int)displayMatrix[connections[i][0], 1] + 1;
                 int z2 = (int)displayMatrix[connections[i][1], 2] + 1;
-                g.DrawLine(pen, new Point(x1, z1), new Point(x2, z2));
+                int y2 = (int)displayMatrix[connections[i][1], 1] + 1;
+                g.DrawLine(pen, new Point(z1, y1), new Point(z2, y2));
             }
         }
 
@@ -98,15 +98,41 @@ namespace сomputer_graphics_lab_1
             paintConnectionsZ(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
         }
 
-        private void FormProjections_Paint(object sender, PaintEventArgs e) 
+        private void FormProjections_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Pen pen = new Pen(Color.Blue, 5);
-
-            PaintProjectionDots(rabbit.ProjectOnX().Item1, rabbit.connectionsBody, g, pen);
-            PaintProjectionDots(rabbit.ProjectOnX().Item2, rabbit.connectionsBody, g, pen);
-            PaintProjectionDots(rabbit.ProjectOnX().Item1, rabbit.ProjectOnX().Item2, rabbit.connectionsFrontBack, g, pen);
-
+            String text = null;
+            foreach (Control ctrl in groupBox4.Controls)
+            {
+                if (ctrl is RadioButton rb && rb.Checked)
+                {
+                    text = rb.Text;
+                }
+            }
+            switch (text)
+            {
+                case "X":
+                    paintDotsX(rabbit.connectionsBody, rabbit.front, g, pen);
+                    paintDotsX(rabbit.connectionsBody, rabbit.back, g, pen);
+                    paintDotsX(rabbit.connectionsFace, rabbit.face, g, pen);
+                    paintConnectionsX(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
+                    break;
+                case "Y":
+                    paintDotsY(rabbit.connectionsBody, rabbit.front, g, pen);
+                    paintDotsY(rabbit.connectionsBody, rabbit.back, g, pen);
+                    paintDotsY(rabbit.connectionsFace, rabbit.face, g, pen);
+                    paintConnectionsY(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
+                    break;
+                case "Z":
+                    paintDotsZ(rabbit.connectionsBody, rabbit.front, g, pen);
+                    paintDotsZ(rabbit.connectionsBody, rabbit.back, g, pen);
+                    paintDotsZ(rabbit.connectionsFace, rabbit.face, g, pen);
+                    paintConnectionsZ(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public Form1()
@@ -154,7 +180,7 @@ namespace сomputer_graphics_lab_1
                     text = rb.Text;
                 }
             }
-            switch (text) 
+            switch (text)
             {
                 case "X":
                     rabbit.move(-10, 0, 0);
@@ -166,7 +192,7 @@ namespace сomputer_graphics_lab_1
                     rabbit.move(0, 0, -10);
                     break;
                 default:
-                   break; 
+                    break;
             }
             paintPanel.Invalidate();
         }
@@ -249,35 +275,7 @@ namespace сomputer_graphics_lab_1
             paintPanel.Invalidate();
         }
 
-        private void button1_Click(object sender, EventArgs e)=> Application.Exit();
-
-
-        private void PaintProjectionDots(Matrix<double> m, List<List<int>> connections, Graphics g, Pen pen) 
-        {
-            //Matrix<double> displayMatrix = rabbit.transformPrXMatrix(projectionPanel, m);
-            //for (int i = 0; i < connections.Count; i++)
-            //{
-            //    int x1 = (int)displayMatrix[connections[i][0], 2] + 1;
-            //    int y1 = (int)displayMatrix[connections[i][0], 1] + 1;
-            //    int x2 = (int)displayMatrix[connections[i][1], 2] + 1;
-            //    int y2 = (int)displayMatrix[connections[i][1], 1] + 1;
-            //    g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
-            //}
-        }
-
-        private void PaintProjectionDots(Matrix<double>m1,Matrix<double>m2, List<List<int>> connections, Graphics g, Pen pen)
-        {
-            //Matrix<double>displayProjFront=rabbit.transformPrXMatrix(projectionPanel,m1);
-            //Matrix<double>displayProjBack=rabbit.transformPrXMatrix(projectionPanel,m2);
-            //for (int i = 0; i < connections.Count; i++)
-            //{
-            //    int x1 = (int)displayProjFront[connections[i][0], 2] + 1;
-            //    int y1 = (int)displayProjFront[connections[i][0], 1] + 1;
-            //    int x2 = (int)displayProjBack[connections[i][1], 2] + 1;
-            //    int y2 = (int)displayProjBack[connections[i][1], 1] + 1;
-            //    g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
-            //}
-        }
+        private void button1_Click(object sender, EventArgs e) => Application.Exit();
 
         private void projectionX_Click(object sender, EventArgs e)
         {

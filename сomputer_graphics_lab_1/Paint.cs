@@ -163,7 +163,7 @@ namespace сomputer_graphics_lab_1
         public Matrix<double>? transformPrXMatrix(Panel paintPanel, Matrix<double> matrix, Plane p)
         {
             Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
-            const int zoomPix = 5;
+            const int zoomPix = 10;
             switch (p)
             {
                 case Plane.X:
@@ -177,8 +177,8 @@ namespace сomputer_graphics_lab_1
                 case Plane.Y:
                     for (int i = 0; i < matrix.getRows(); i++)
                     {
-                        result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 2];
-                        result[i, 1] = paintPanel.Height / 2 + zoomPix * matrix[i, 1];
+                        result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 0];
+                        result[i, 2] = paintPanel.Height / 2 + zoomPix * matrix[i, 2];
                         result[i, 3] = 1;
                     }
                     break;
