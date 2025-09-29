@@ -249,13 +249,5 @@ namespace сomputer_graphics_lab_1
             Matrix<double> FaceProjection = face.multiplyMatrix(matrixX);
             return (FrontProjection, BackProjection, FaceProjection);
         }
-
-        public void ProjectOnY()
-        {
-        }
-
-        public void ProjectOnZ()
-        {
-        }
     }
 }
