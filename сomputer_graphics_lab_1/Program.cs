@@ -1,4 +1,4 @@
-namespace сomputer_graphics_lab_1
+namespace сomputer_graphics_lab
 {
     internal static class Program
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace сomputer_graphics_lab_1
+namespace сomputer_graphics_lab
 {
     //Перечисления для проекция
     enum Plane
@@ -144,41 +144,39 @@ namespace сomputer_graphics_lab_1
 
         }
 
-        public Matrix<double> transformMatrix(Panel paintPanel, Matrix<double> matrix)
+        static public Matrix<int> transformMatrix(Panel paintPanel, Matrix<double> matrix)
         {
-            Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
+            Matrix<int> result = new Matrix<int>(matrix.getRows(), matrix.getCols());
             const int zoomPix = 10;
             for (int i = 0; i < matrix.getRows(); i++)
             {
-                result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 0];
-                result[i, 1] = paintPanel.Height / 2 - zoomPix* matrix[i, 1];
-                result[i, 2] = zoomPix * matrix[i, 2];
-                result[i, 3] = 1;
+                result[i, 0] = (int)(paintPanel.Width / 2 + zoomPix * matrix[i, 0]) + 1;
+                result[i, 1] = (int)(paintPanel.Height / 2 - zoomPix* matrix[i, 1]) + 1;
             }
             return result;
         }
 
 
         //Перевод из мировых в экранные координаты в зависимости от плоскости
-        public Matrix<double>? transformPrXMatrix(Panel paintPanel, Matrix<double> matrix, Plane p)
+        static public Matrix<int>? transformPrMatrix(Panel paintPanel, Matrix<double> matrix, Plane p)
         {
-            Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
+            Matrix<int> result = new Matrix<int>(matrix.getRows(), matrix.getCols());
             const int zoomPix = 10;
             switch (p)
             {
                 case Plane.X:
                     for (int i = 0; i < matrix.getRows(); i++)
                     {
-                        result[i, 1] = paintPanel.Height / 2 - zoomPix * matrix[i, 1];
-                        result[i, 2] = paintPanel.Width / 2 + zoomPix * matrix[i, 2];
+                        result[i, 1] = (int)(paintPanel.Height / 2 - zoomPix * matrix[i, 1]) + 1;
+                        result[i, 2] = (int)(paintPanel.Width / 2 + zoomPix * matrix[i, 2]) + 1;
                         result[i, 3] = 1;
                     }
                     break;
                 case Plane.Y:
                     for (int i = 0; i < matrix.getRows(); i++)
                     {
-                        result[i, 0] = paintPanel.Width / 2 + zoomPix * matrix[i, 0];
-                        result[i, 2] = paintPanel.Height / 2 - zoomPix * matrix[i, 2];
+                        result[i, 0] = (int)(paintPanel.Width / 2 + zoomPix * matrix[i, 0]) + 1;
+                        result[i, 2] = (int)(paintPanel.Height / 2 - zoomPix * matrix[i, 2]) + 1 ;
                         result[i, 3] = 1;
                     }
                     break;
@@ -250,7 +248,7 @@ namespace сomputer_graphics_lab_1
             return (FrontProjection, BackProjection, FaceProjection);
         }
 
-        public Matrix<double> calculateDotsBetweenTwo(Matrix<double> dots, List<List<int>> connections) 
+        static public Matrix<double> calculateDotsBetweenTwo(Matrix<double> dots, List<List<int>> connections) 
         {
             const int CNTDOTS = 1000;
             Matrix<double> result = new Matrix<double>(connections.Count* CNTDOTS, 3);

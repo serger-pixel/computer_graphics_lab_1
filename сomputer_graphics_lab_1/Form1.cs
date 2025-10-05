@@ -1,17 +1,40 @@
 using System.Collections.Generic;
 using System.Drawing;
+using static System.Net.Mime.MediaTypeNames;
 
-namespace сomputer_graphics_lab_1
+namespace сomputer_graphics_lab
 {
     public partial class Form1 : Form
     {
         Paint rabbit = new Paint();
 
         // Отрисовка с невидимыми линиями
-        private void paintDotsWithoutLines(List<List<int>> connections, Matrix<double> dots, Plane plane,
-            DepthBuffer depthbuffer, FrameBuffer frameBuffer)
-        { 
-            
+        private void paintDotsWithoutLines(List<List<int>> connections, Matrix<double> mainDots, Plane plane,
+            DepthBuffer depthBuffer, FrameBuffer frameBuffer, Panel paintPanel)
+        {
+            Matrix<double> allDots = сomputer_graphics_lab.Paint.calculateDotsBetweenTwo(mainDots, connections);
+            Matrix<int> displayAllDots = сomputer_graphics_lab.Paint.transformPrMatrix(paintPanel, allDots, plane);
+            for (int i = 0; i < displayAllDots.getRows(); i++)
+            {
+                switch (plane)
+                {
+                    case Plane.X:
+                        if (depthBuffer[i, 0] < displayAllDots[i, 0])
+                        {
+                            depthBuffer[i, 0] = displayAllDots[i, 0];
+                            frameBuffer[displayAllDots[i, 2], displayAllDots[i, 1]] = 1;
+                        }
+                        break;
+                    case Plane.Y:
+
+                        break;
+                    case Plane.Z:
+
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
        

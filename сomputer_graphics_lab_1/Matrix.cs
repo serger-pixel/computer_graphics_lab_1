@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace сomputer_graphics_lab_1
+namespace сomputer_graphics_lab
 {
 
     public class Matrix<T> where T : INumber<T>
