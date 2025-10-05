@@ -154,4 +154,32 @@ namespace сomputer_graphics_lab_1
             innerMatrix[2][2]=0;
         }
     }
+
+    public class DepthBuffer : Matrix<double>
+    {
+        public DepthBuffer(Panel paintPanel) : base(paintPanel.Height, paintPanel.Width) 
+        {
+            for (int i = 0; i < getRows(); i++) 
+            {
+                for (int j = 0; j < getCols(); j++) 
+                {
+                    innerMatrix[i][j] = Double.MinValue;
+                }
+            }
+        } 
+    }
+
+    public class FrameBuffer : Matrix<double> 
+    {
+        public FrameBuffer(Panel paintPanel) : base(paintPanel.Height, paintPanel.Width) 
+        {
+            for (int i = 0; i < getRows(); i++)
+            {
+                for (int j = 0; j < getCols(); j++)
+                {
+                    innerMatrix[i][j] = 0;
+                }
+            }
+        }
+    }
 }

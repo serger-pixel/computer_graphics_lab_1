@@ -7,86 +7,15 @@ namespace сomputer_graphics_lab_1
     {
         Paint rabbit = new Paint();
 
-        private void paintDotsZ(List<List<int>> connections, Matrix<double> dots, Graphics g, Pen pen)
-        {
-            Matrix<double> displayMatrix = rabbit.transformPrXMatrix(paintPanel, dots, Plane.Z);
-            for (int i = 0; i < connections.Count; i++)
-            {
-                int x1 = (int)displayMatrix[connections[i][0], 0] + 1;
-                int y1 = (int)displayMatrix[connections[i][0], 1] + 1;
-                int x2 = (int)displayMatrix[connections[i][1], 0] + 1;
-                int y2 = (int)displayMatrix[connections[i][1], 1] + 1;
-                g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
-            }
+        // Отрисовка с невидимыми линиями
+        private void paintDotsWithoutLines(List<List<int>> connections, Matrix<double> dots, Plane plane,
+            DepthBuffer depthbuffer, FrameBuffer frameBuffer)
+        { 
+            
         }
 
-        private void paintConnectionsZ(List<List<int>> connections, Matrix<double> dots1, Matrix<double> dots2, Graphics g, Pen pen)
-        {
-            Matrix<double> displayMatrix1 = rabbit.transformPrXMatrix(paintPanel, dots1, Plane.Z);
-            Matrix<double> displayMatrix2 = rabbit.transformPrXMatrix(paintPanel, dots2, Plane.Z);
-            for (int i = 0; i < connections.Count; i++)
-            {
-                int x1 = (int)displayMatrix1[connections[i][0], 0] + 1;
-                int y1 = (int)displayMatrix1[connections[i][0], 1] + 1;
-                int x2 = (int)displayMatrix2[connections[i][1], 0] + 1;
-                int y2 = (int)displayMatrix2[connections[i][1], 1] + 1;
-                g.DrawLine(pen, new Point(x1, y1), new Point(x2, y2));
-            }
-        }
+       
 
-        private void paintDotsY(List<List<int>> connections, Matrix<double> dots, Graphics g, Pen pen)
-        {
-            Matrix<double> displayMatrix = rabbit.transformPrXMatrix(paintPanel, dots, Plane.Y);
-            for (int i = 0; i < connections.Count; i++)
-            {
-                int x1 = (int)displayMatrix[connections[i][0], 0] + 1;
-                int z1 = (int)displayMatrix[connections[i][0], 2] + 1;
-                int x2 = (int)displayMatrix[connections[i][1], 0] + 1;
-                int z2 = (int)displayMatrix[connections[i][1], 2] + 1;
-                g.DrawLine(pen, new Point(x1, z1), new Point(x2, z2));
-            }
-        }
-
-        private void paintConnectionsY(List<List<int>> connections, Matrix<double> dots1, Matrix<double> dots2, Graphics g, Pen pen)
-        {
-            Matrix<double> displayMatrix1 = rabbit.transformPrXMatrix(paintPanel, dots1, Plane.Y);
-            Matrix<double> displayMatrix2 = rabbit.transformPrXMatrix(paintPanel, dots2, Plane.Y);
-            for (int i = 0; i < connections.Count; i++)
-            {
-                int x1 = (int)displayMatrix1[connections[i][0], 0] + 1;
-                int z1 = (int)displayMatrix1[connections[i][0], 2] + 1;
-                int x2 = (int)displayMatrix2[connections[i][1], 0] + 1;
-                int z2 = (int)displayMatrix2[connections[i][1], 2] + 1;
-                g.DrawLine(pen, new Point(x1, z1), new Point(x2, z2));
-            }
-        }
-
-        private void paintDotsX(List<List<int>> connections, Matrix<double> dots, Graphics g, Pen pen)
-        {
-            Matrix<double> displayMatrix = rabbit.transformPrXMatrix(paintPanel, dots, Plane.X);
-            for (int i = 0; i < connections.Count; i++)
-            {
-                int z1 = (int)displayMatrix[connections[i][0], 2] + 1;
-                int y1 = (int)displayMatrix[connections[i][0], 1] + 1;
-                int z2 = (int)displayMatrix[connections[i][1], 2] + 1;
-                int y2 = (int)displayMatrix[connections[i][1], 1] + 1;
-                g.DrawLine(pen, new Point(z1, y1), new Point(z2, y2));
-            }
-        }
-
-        private void paintConnectionsX(List<List<int>> connections, Matrix<double> dots1, Matrix<double> dots2, Graphics g, Pen pen)
-        {
-            Matrix<double> displayMatrix1 = rabbit.transformPrXMatrix(paintPanel, dots1, Plane.X);
-            Matrix<double> displayMatrix2 = rabbit.transformPrXMatrix(paintPanel, dots2, Plane.X);
-            for (int i = 0; i < connections.Count; i++)
-            {
-                int z1 = (int)displayMatrix1[connections[i][0], 2] + 1;
-                int y1 = (int)displayMatrix1[connections[i][0], 1] + 1;
-                int z2 = (int)displayMatrix2[connections[i][1], 2] + 1;
-                int y2 = (int)displayMatrix2[connections[i][1], 1] + 1;
-                g.DrawLine(pen, new Point(z1, y1), new Point(z2, y2));
-            }
-        }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {

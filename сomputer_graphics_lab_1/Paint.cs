@@ -249,5 +249,54 @@ namespace сomputer_graphics_lab_1
             Matrix<double> FaceProjection = face.multiplyMatrix(matrixX);
             return (FrontProjection, BackProjection, FaceProjection);
         }
+
+        public Matrix<double> calculateDotsBetweenTwo(Matrix<double> dots, List<List<int>> connections) 
+        {
+            const int CNTDOTS = 1000;
+            Matrix<double> result = new Matrix<double>(connections.Count* CNTDOTS, 3);
+
+            int ind = 0;
+            for (int i = 0; i < connections.Count; i++) 
+            {
+                double firstY = dots[connections[i][0], 1];
+                double secondY = dots[connections[i][1], 1];
+                double firstX = dots[connections[i][0], 0];
+                double secondX = dots[connections[i][1], 0];
+                double firstZ = dots[connections[i][0], 2];
+                double secondZ = dots[connections[i][1], 2];
+             
+
+                if (firstY > secondY) 
+                {
+                    double temp = firstY;
+                    firstY = secondY;
+                    secondY = temp;
+
+                    temp = firstX;
+                    firstX = secondX;
+                    secondX = temp;
+
+                    temp = firstZ;
+                    firstZ = secondZ;
+                    secondZ = temp;
+                }
+
+                double step = (secondY - firstY) / CNTDOTS;
+
+                for (int j = 0; j < CNTDOTS; j ++) 
+                {
+                    double tempY = j * step;
+                    double Z = firstZ + (secondZ - firstZ) * ((tempY - firstY) / (secondY - firstY));
+                    double X = firstX + (secondX - firstX) * ((tempY - firstY) / (secondY - firstY));
+
+                    result[ind, 0] = X;
+                    result[ind, 1] = tempY;
+                    result[ind, 2] = Z;
+                    
+                }
+            }
+
+            return result; 
+        }
     }
 }

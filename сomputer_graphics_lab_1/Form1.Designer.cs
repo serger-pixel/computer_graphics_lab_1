@@ -318,7 +318,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(855, 749);
+            ClientSize = new Size(1370, 749);
             Controls.Add(groupBox4);
             Controls.Add(projectionPanel);
             Controls.Add(groupBox3);
