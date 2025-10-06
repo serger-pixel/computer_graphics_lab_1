@@ -127,69 +127,75 @@ namespace сomputer_graphics_lab
             //Соединения тела
             connectionsBody = new List<List<int>>();
 
-            connectionsBody.Add(new List<int>() {0, 1, 2, 3}); //Левое ухо
-            connectionsBody.Add(new List<int>() {3, 4, 31, 32}); // Голова
-            connectionsBody.Add(new List<int>() {5, 6, 29, 30}); // Шея
-            connectionsBody.Add(new List<int>() {7, 28, 21, 14}); // Тело
-            connectionsBody.Add(new List<int>() {7, 8, 12, 13}); // Левое плечо
-            connectionsBody.Add(new List<int>() {8, 9, 10, 11}); // Левая рука
-            connectionsBody.Add(new List<int>() {14, 15, 16, 17}); // Левая нога
-            connectionsBody.Add(new List<int>() {18, 19, 20, 21}); // Правая нога
-            connectionsBody.Add(new List<int>() {27, 24, 25, 26}); // Правая рука
-            connectionsBody.Add(new List<int>() {27, 28, 22, 23}); // Правое плечо
-            connectionsBody.Add(new List<int>() {32, 33, 34, 35}); // Правое ухо
+            connectionsBody.Add(new List<int>() {2, 1, 3, 0}); //Левое ухо
+            connectionsBody.Add(new List<int>() {3, 32, 4, 31}); // Голова
+            connectionsBody.Add(new List<int>() {5, 30, 6, 29}); // Шея
+            connectionsBody.Add(new List<int>() {7, 28, 14, 21}); // Тело
+            connectionsBody.Add(new List<int>() {8, 7, 12, 13}); // Левое плечо
+            connectionsBody.Add(new List<int>() {9, 8, 10, 11}); // Левая рука
+            connectionsBody.Add(new List<int>() {14, 17, 15, 16}); // Левая нога
+            connectionsBody.Add(new List<int>() {18, 21, 19, 20}); // Правая нога
+            connectionsBody.Add(new List<int>() {27, 26, 24, 25}); // Правая рука
+            connectionsBody.Add(new List<int>() {28, 27, 22, 23}); // Правое плечо
+            connectionsBody.Add(new List<int>() {34, 33, 35, 32}); // Правое ухо
 
             //Соединения лица
             connectionsFace = new List<List<int>>();
 
-            connectionsFace.Add(new List<int>() { 0, 1, 2, 3 }); // Левый глаз
-            connectionsFace.Add(new List<int>() { 4, 5, 6, 7 }); // Правый глаз
-            connectionsFace.Add(new List<int>() { 8, 9, 10, 11 }); // Нос
+            connectionsFace.Add(new List<int>() { 0, 1, 3, 2 }); // Левый глаз
+            connectionsFace.Add(new List<int>() { 5, 4, 6, 7 }); // Правый глаз
+            connectionsFace.Add(new List<int>() { 8, 9, 11, 10 }); // Нос
 
             //Соединения передней и задней стороны
             connectionsFrontBack = new List<List<int>>();
 
-            for (int i = 0; i < 3; i++) // Грани ушей
+            for (int i = 1; i < 3; i++) // Грани ушей
             {
                 connectionsFrontBack.Add(new List<int>() { i, i, i+1, i+1 });
                 connectionsFrontBack.Add(new List<int>() { i+32, i+32, i+33, i+33 });
             }
+            connectionsFrontBack.Add(new List<int>() { 1, 1, 0, 0 }); // Левое ухо справа
+            connectionsFrontBack.Add(new List<int>() { 33, 33, 32, 32 }); //Правое ухо справа
 
             connectionsFrontBack.Add(new List<int>() { 3, 3, 4, 4 }); // Голова слева
             connectionsFrontBack.Add(new List<int>() { 4, 4, 31, 31 }); // Голова снизу
-            connectionsFrontBack.Add(new List<int>() { 31, 31, 32, 32 }); // Голова справа
-            connectionsFrontBack.Add(new List<int>() { 3, 3, 32, 32 }); // Голова сверху
+            connectionsFrontBack.Add(new List<int>() { 32, 32, 31, 31 }); // Голова справа
+            connectionsFrontBack.Add(new List<int>() { 32, 32, 3, 3 }); // Голова сверху
 
             connectionsFrontBack.Add(new List<int>() { 5, 5, 6, 6 }); // Шея слева
-            connectionsFrontBack.Add(new List<int>() { 29, 29, 30, 30 }); // Шея справа
+            connectionsFrontBack.Add(new List<int>() { 30, 30, 29, 29 }); // Шея справа
 
             connectionsFrontBack.Add(new List<int>() { 7, 7, 14, 14 }); // Тело слева
-            connectionsFrontBack.Add(new List<int>() { 14, 14, 21, 21 }); // Тело снизу
-            connectionsFrontBack.Add(new List<int>() { 21, 21, 28, 28 }); // Тело справа
-            connectionsFrontBack.Add(new List<int>() { 7, 7, 28, 28 }); // Тело сверху
+            connectionsFrontBack.Add(new List<int>() { 21, 21, 14, 14 }); // Тело снизу
+            connectionsFrontBack.Add(new List<int>() { 28, 28, 21, 21 }); // Тело справа
+            connectionsFrontBack.Add(new List<int>() { 28, 28, 7, 7 }); // Тело сверху
 
-            connectionsFrontBack.Add(new List<int>() { 8, 8, 7, 7 }); // Левое плечо сверху
-            connectionsFrontBack.Add(new List<int>() { 12, 12, 13, 13 }); // Левое плечо снизу
+            connectionsFrontBack.Add(new List<int>() { 7, 7, 8, 8 }); // Левое плечо сверху
+            connectionsFrontBack.Add(new List<int>() { 13, 13, 12, 12 }); // Левое плечо снизу
 
-            connectionsFrontBack.Add(new List<int>() { 28, 28, 27, 27 }); // Правое плечо сверху
-            connectionsFrontBack.Add(new List<int>() { 22, 22, 23, 23 }); // Правое плечо снизу
+            connectionsFrontBack.Add(new List<int>() { 27, 27, 28, 28 }); // Правое плечо сверху
+            connectionsFrontBack.Add(new List<int>() { 23, 23, 22, 22 }); // Правое плечо снизу
 
-            for (int i = 8; i < 11; i++) // Грани левой руки
+            for (int i = 8; i < 10; i++) // Грани левой руки
             {
                 connectionsFrontBack.Add(new List<int>() { i, i, i+1, i+1 }); 
             }
-            connectionsFrontBack.Add(new List<int>() { 11, 11, 8, 8 }); // Левая рука справа
+            connectionsFrontBack.Add(new List<int>() { 11, 11, 10, 10 }); // Левая рука снизу
+            connectionsFrontBack.Add(new List<int>() { 8, 8, 11, 11 }); // Левая рука справа
 
-            for (int i = 14; i < 21; i++) // Грани ног
-            {
-                if (i == 17) { continue; }
-                connectionsFrontBack.Add(new List<int>() { i, i, i + 1, i + 1 });
-            }
+            connectionsFrontBack.Add(new List<int>() { 17, 17, 14, 14 }); // Левая нога сверху
+            connectionsFrontBack.Add(new List<int>() { 14, 14, 15, 15 }); // Левая нога слева
+            connectionsFrontBack.Add(new List<int>() { 16, 16, 15, 15 }); // Левая нога снизу
+            connectionsFrontBack.Add(new List<int>() { 17, 17, 16, 16 }); // Левая нога справа
 
-            for (int i = 24; i < 27; i++) // Грани правой руки
-            {
-                connectionsFrontBack.Add(new List<int>() { i, i, i + 1, i + 1 });
-            }
+            connectionsFrontBack.Add(new List<int>() { 21, 21, 18, 18 }); // Правая нога сверху
+            connectionsFrontBack.Add(new List<int>() { 18, 18, 19, 19 }); // Правая нога слева
+            connectionsFrontBack.Add(new List<int>() { 20, 20, 19, 19 }); // Правая нога снизу
+            connectionsFrontBack.Add(new List<int>() { 21, 21, 20, 20 }); // Правая нога справа
+
+            connectionsFrontBack.Add(new List<int>() { 26, 26, 27, 27 }); // Правая сверху
+            connectionsFrontBack.Add(new List<int>() { 25, 25, 24, 24 }); // Правая рука снизу
+            connectionsFrontBack.Add(new List<int>() { 26, 26, 25, 25 }); // Правая рука справа
             connectionsFrontBack.Add(new List<int>() { 27, 27, 24, 24 }); // Правая рука слева
 
         }
