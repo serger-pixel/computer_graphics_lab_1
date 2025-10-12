@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,8 +10,8 @@ namespace сomputer_graphics_lab
 {
     static class GeometryWorker
     {
-        //Нахождение k и b из y=kx+b
-        public static (double, double) findCoeffLinearEquation(Matrix<double> dots, int indFirst, int indSecond, Plane plane)
+        //Нахождение k и b из y=kx+b. l -> k, m -> b
+        public static Matrix<double> findCoeffLinearEquation(Matrix<double> dots, int indFirst, int indSecond, Plane plane)
         {
             int firstAxis = 0;
             int secondAxis = 1;
@@ -33,7 +34,9 @@ namespace сomputer_graphics_lab
             }
             double l = dots[indFirst, firstAxis] - dots[indSecond, firstAxis] / (dots[indFirst, secondAxis] - dots[indSecond, secondAxis]);
             double m = dots[indFirst, secondAxis] - l * dots[indFirst, firstAxis];
-            return (l, m);
+            Matrix<double> result = new Matrix<double>(0, 0);
+            result.addRow(new List<double> { m, l});
+            return result;
         }
 
         //Нахождение A, B, C (->n){A, B, C}. ->n - вектор нормаль
@@ -58,7 +61,89 @@ namespace сomputer_graphics_lab
             return result;
         }
 
+        //Нахождение точек внутри треугольника, ограниченного тремя точками
+        public static void findTriangleDots(Matrix<double> result, Matrix<double> vectorN, Matrix<double> dots, int first, int second, int third,
+                                            Plane plane, int firstAxis, int secondAxis, int cntDots)
+        {
+            Matrix<double> firstLine = findCoeffLinearEquation(dots, first, second, plane);
+            Matrix<double> secondLine = findCoeffLinearEquation(dots, first, third, plane);
+            Matrix<double> thirdLine = findCoeffLinearEquation(dots, third, second, plane);
 
+            double stepFirstAxis = (dots[second, firstAxis] - dots[first, firstAxis]) / cntDots;
+            double stepSecondAxis = (dots[second, secondAxis] - dots[first, secondAxis]) / cntDots;
+            double currentFirstAxis = dots[second, firstAxis] - stepFirstAxis;
+            double currentSecondAxis = dots[second, secondAxis] - stepSecondAxis;
+
+            double thirdValue = 0;
+            for (double a = cntDots; a > 0; a--)
+            {
+                currentFirstAxis += stepFirstAxis;
+                for (double b = cntDots; b > 0; b--)
+                {
+                    currentSecondAxis += stepSecondAxis;
+                    if (b < a * firstLine[0, 0] + firstLine[0, 1] &&
+                        b > a * secondLine[0, 0] + secondLine[0, 1] &&
+                        b > a * thirdLine[0, 0] + thirdLine[0, 1])
+                    {
+                        switch (plane)
+                        {
+                            case Plane.X:
+                                thirdValue = -(vectorN[0, 2] * currentFirstAxis + vectorN[0, 1] * currentSecondAxis) / vectorN[0, 0];
+                                result.addRow(new List<double> { thirdValue, currentSecondAxis, currentFirstAxis });
+                                break;
+                            case Plane.Y:
+                                thirdValue = -(vectorN[0, 0] * currentFirstAxis + vectorN[0, 2] * currentSecondAxis) / vectorN[0, 1];
+                                result.addRow(new List<double> { currentFirstAxis, thirdValue, currentSecondAxis });
+                                break;
+                            case Plane.Z:
+                                thirdValue = -(vectorN[0, 0] * currentFirstAxis + vectorN[0, 1] * currentSecondAxis) / vectorN[0, 2];
+                                result.addRow(new List<double> { currentFirstAxis, currentSecondAxis, thirdValue });
+                                break;
+                            default: break;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        //Нахождение всех точек одной стороны рисунка
+        // 0 - X, 1 - Y, 2 - Z
+        public static Matrix<double> findSideDots(Matrix<double> dots, List<List<int>> connections, int cntDots)
+        {
+            Matrix<double> result = new Matrix<double>(0, 0);
+            for (int i = 0; i < connections.Count; i++) {
+                int first = connections[i][0];
+                int second = connections[i][1];
+                int third = connections[i][2];
+                int fourth = connections[i][3];
+                Matrix<double> vectorN = findNormal(dots, first, second, third);
+                int firstAxis = 0;
+                int secondAxis = 1;
+                Plane plane = Plane.Z;
+                if (((vectorN)[0, 0] < Math.Pow(1, -5) && vectorN[0, 0] > -Math.Pow(1, -5)) ||
+                        (vectorN[0, 2] < Math.Pow(1, -5) && vectorN[0, 2] > -Math.Pow(1, -5)))
+                {
+                    firstAxis = 0;
+                    secondAxis = 2;
+                    plane = Plane.Y;
+                }
+                else if (((vectorN)[0, 1] < Math.Pow(1, -5) && vectorN[0, 1] > -Math.Pow(1, -5)) ||
+                        (vectorN[0, 2] < Math.Pow(1, -5) && vectorN[0, 2] > -Math.Pow(1, -5)))
+                {
+                    firstAxis = 2;
+                    secondAxis = 1;
+                    plane = Plane.X;
+                }
+                //Первый треугольник
+                findTriangleDots(result, vectorN, dots, first, second, third, plane, firstAxis, secondAxis, cntDots);
+
+                //Второй треугольник
+                findTriangleDots(result, vectorN, dots, third, second, fourth, plane, firstAxis, secondAxis, cntDots);
+            }
+            return result;
+
+        }
 
     }
 }
