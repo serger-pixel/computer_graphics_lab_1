@@ -206,40 +206,51 @@ namespace сomputer_graphics_lab
 
         }
 
-        static public Matrix<int> transformMatrix(Panel paintPanel, Matrix<double> matrix)
+        static public Matrix<double> transformMatrix(Panel paintPanel, Matrix<double> matrix)
         {
-            Matrix<int> result = new Matrix<int>(matrix.getRows(), matrix.getCols());
+            Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
             const int zoomPix = 10;
             for (int i = 0; i < matrix.getRows(); i++)
             {
                 result[i, 0] = (int)(paintPanel.Width / 2 + zoomPix * matrix[i, 0]) + 1;
+                if (result[i, 0] < 0)
+                {
+                    result[i, 0] = 0;
+                }
                 result[i, 1] = (int)(paintPanel.Height / 2 - zoomPix* matrix[i, 1]) + 1;
+                if (result[i, 1] < 0)
+                {
+                    result[i, 1] = 0;
+                }
+                result[i, 2] = matrix[i, 2];
+
+
             }
             return result;
         }
 
 
         //Перевод из мировых в экранные координаты в зависимости от плоскости
-        static public Matrix<int>? transformPrMatrix(Panel paintPanel, Matrix<double> matrix, Plane p)
+        static public Matrix<double>? transformPrMatrix(Panel paintPanel, Matrix<double> matrix, Plane p)
         {
-            Matrix<int> result = new Matrix<int>(matrix.getRows(), matrix.getCols());
+            Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
             const int zoomPix = 10;
             switch (p)
             {
                 case Plane.X:
                     for (int i = 0; i < matrix.getRows(); i++)
                     {
+                        result[i, 0] = matrix[i, 0];
                         result[i, 1] = (int)(paintPanel.Height / 2 - zoomPix * matrix[i, 1]) + 1;
                         result[i, 2] = (int)(paintPanel.Width / 2 + zoomPix * matrix[i, 2]) + 1;
-                        result[i, 3] = 1;
                     }
                     break;
                 case Plane.Y:
                     for (int i = 0; i < matrix.getRows(); i++)
                     {
                         result[i, 0] = (int)(paintPanel.Width / 2 + zoomPix * matrix[i, 0]) + 1;
-                        result[i, 2] = (int)(paintPanel.Height / 2 - zoomPix * matrix[i, 2]) + 1 ;
-                        result[i, 3] = 1;
+                        result[i, 1] = matrix[i, 1];
+                        result[i, 2] = (int)(paintPanel.Height / 2 - zoomPix * matrix[i, 2]) + 1;
                     }
                     break;
                 case Plane.Z:
@@ -308,55 +319,6 @@ namespace сomputer_graphics_lab
             Matrix<double> BackProjection = back.multiplyMatrix(matrixX);
             Matrix<double> FaceProjection = face.multiplyMatrix(matrixX);
             return (FrontProjection, BackProjection, FaceProjection);
-        }
-
-        static public Matrix<double> calculateDotsBetweenTwo(Matrix<double> dots, List<List<int>> connections) 
-        {
-            const int CNTDOTS = 200;
-            Matrix<double> result = new Matrix<double>(connections.Count* CNTDOTS, 3);
-
-            int ind = 0;
-            for (int i = 0; i < connections.Count; i++) 
-            {
-                double firstY = dots[connections[i][0], 1];
-                double secondY = dots[connections[i][1], 1];
-                double firstX = dots[connections[i][0], 0];
-                double secondX = dots[connections[i][1], 0];
-                double firstZ = dots[connections[i][0], 2];
-                double secondZ = dots[connections[i][1], 2];
-             
-
-                if (firstY > secondY) 
-                {
-                    double temp = firstY;
-                    firstY = secondY;
-                    secondY = temp;
-
-                    temp = firstX;
-                    firstX = secondX;
-                    secondX = temp;
-
-                    temp = firstZ;
-                    firstZ = secondZ;
-                    secondZ = temp;
-                }
-
-                double step = (secondY - firstY) / CNTDOTS;
-
-                for (int j = 0; j < CNTDOTS; j ++) 
-                {
-                    double tempY = j * step;
-                    double Z = firstZ + (secondZ - firstZ) * ((tempY - firstY) / (secondY - firstY));
-                    double X = firstX + (secondX - firstX) * ((tempY - firstY) / (secondY - firstY));
-
-                    result[ind, 0] = X;
-                    result[ind, 1] = tempY;
-                    result[ind, 2] = Z;
-                    
-                }
-            }
-
-            return result; 
         }
     }
 }

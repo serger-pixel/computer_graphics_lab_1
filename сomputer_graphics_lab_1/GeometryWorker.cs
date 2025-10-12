@@ -32,10 +32,15 @@ namespace сomputer_graphics_lab
                 default: 
                     break;
             }
-            double l = dots[indFirst, firstAxis] - dots[indSecond, firstAxis] / (dots[indFirst, secondAxis] - dots[indSecond, secondAxis]);
-            double m = dots[indFirst, secondAxis] - l * dots[indFirst, firstAxis];
+            double k = dots[indFirst, secondAxis] - dots[indSecond, secondAxis];
+            double n = (dots[indFirst, firstAxis] - dots[indSecond, firstAxis]);
+            double l = (dots[indFirst, secondAxis] - dots[indSecond, secondAxis]) / (dots[indFirst, firstAxis] - dots[indSecond, firstAxis]);
+            if (Math.Abs(dots[indFirst, firstAxis] - dots[indSecond, firstAxis]) <  Math.Pow(10, -5)){
+                l = 0;
+            }
+            double m = dots[indSecond, secondAxis] - l * dots[indSecond, firstAxis];
             Matrix<double> result = new Matrix<double>(0, 0);
-            result.addRow(new List<double> { m, l});
+            result.addRow(new List<double> { l, m});
             return result;
         }
 
@@ -62,7 +67,7 @@ namespace сomputer_graphics_lab
         }
 
         //Нахождение точек внутри треугольника, ограниченного тремя точками
-        public static void findTriangleDots(Matrix<double> result, Matrix<double> vectorN, Matrix<double> dots, int first, int second, int third,
+        public static Matrix<double> findTriangleDots(Matrix<double> result, Matrix<double> vectorN, Matrix<double> dots, int first, int second, int third,
                                             Plane plane, int firstAxis, int secondAxis, int cntDots)
         {
             Matrix<double> firstLine = findCoeffLinearEquation(dots, first, second, plane);
@@ -88,15 +93,15 @@ namespace сomputer_graphics_lab
                         switch (plane)
                         {
                             case Plane.X:
-                                thirdValue = -(vectorN[0, 2] * currentFirstAxis + vectorN[0, 1] * currentSecondAxis) / vectorN[0, 0];
+                                thirdValue = -(vectorN[0, 2] * (currentFirstAxis - dots[first, 2]) + vectorN[0, 1] * (currentSecondAxis - dots[first, 1]) )/ vectorN[0, 0] + dots[first, 0];
                                 result.addRow(new List<double> { thirdValue, currentSecondAxis, currentFirstAxis });
                                 break;
                             case Plane.Y:
-                                thirdValue = -(vectorN[0, 0] * currentFirstAxis + vectorN[0, 2] * currentSecondAxis) / vectorN[0, 1];
+                                thirdValue = -(vectorN[0, 0] * (currentFirstAxis) - dots[first, 0] + vectorN[0, 2] * (currentSecondAxis - dots[first, 2]) )/ vectorN[0, 1] + dots[first, 1];
                                 result.addRow(new List<double> { currentFirstAxis, thirdValue, currentSecondAxis });
                                 break;
                             case Plane.Z:
-                                thirdValue = -(vectorN[0, 0] * currentFirstAxis + vectorN[0, 1] * currentSecondAxis) / vectorN[0, 2];
+                                thirdValue = -(vectorN[0, 0] * (currentFirstAxis - dots[first, 0]) + vectorN[0, 1] * (currentSecondAxis - dots[first, 1])) / vectorN[0, 2] + dots[first, 2];
                                 result.addRow(new List<double> { currentFirstAxis, currentSecondAxis, thirdValue });
                                 break;
                             default: break;
@@ -104,6 +109,7 @@ namespace сomputer_graphics_lab
                     }
                 }
             }
+            return result;
         }
 
 
@@ -121,25 +127,55 @@ namespace сomputer_graphics_lab
                 int firstAxis = 0;
                 int secondAxis = 1;
                 Plane plane = Plane.Z;
-                if (((vectorN)[0, 0] < Math.Pow(1, -5) && vectorN[0, 0] > -Math.Pow(1, -5)) ||
-                        (vectorN[0, 2] < Math.Pow(1, -5) && vectorN[0, 2] > -Math.Pow(1, -5)))
+                if (((vectorN)[0, 0] < Math.Pow(10, -5) && vectorN[0, 0] > -Math.Pow(10, -5)) &&
+                        (vectorN[0, 2] < Math.Pow(10, -5) && vectorN[0, 2] > -Math.Pow(10, -5)))
                 {
                     firstAxis = 0;
                     secondAxis = 2;
                     plane = Plane.Y;
                 }
-                else if (((vectorN)[0, 1] < Math.Pow(1, -5) && vectorN[0, 1] > -Math.Pow(1, -5)) ||
-                        (vectorN[0, 2] < Math.Pow(1, -5) && vectorN[0, 2] > -Math.Pow(1, -5)))
+                else if (((vectorN)[0, 1] < Math.Pow(10, -5) && vectorN[0, 1] > -Math.Pow(10, -5)) &&
+                        (vectorN[0, 2] < Math.Pow(10, -5) && vectorN[0, 2] > -Math.Pow(10, -5)))
                 {
                     firstAxis = 2;
                     secondAxis = 1;
                     plane = Plane.X;
                 }
+
+                else if (((vectorN)[0, 0] < Math.Pow(10, -5) && vectorN[0, 0] > -Math.Pow(10, -5)) &&
+                        (vectorN[0, 1] < Math.Pow(10, -5) && vectorN[0, 1] > -Math.Pow(10, -5)))
+                {
+                    firstAxis = 0;
+                    secondAxis = 1;
+                    plane = Plane.Z;
+                }
+
+                else if (((vectorN)[0, 0] < Math.Pow(10, -5) && vectorN[0, 0] > -Math.Pow(10, -5)))
+                {
+                    firstAxis = 2;
+                    secondAxis = 1;
+                    plane = Plane.X;
+                }
+
+                else if (((vectorN)[0, 1] < Math.Pow(10, -5) && vectorN[0, 1] > -Math.Pow(10, -5)))
+                {
+                    firstAxis = 0;
+                    secondAxis = 1;
+                    plane = Plane.Y;
+                }
+
+                else if (((vectorN)[0, 2] < Math.Pow(10, -5) && vectorN[0, 2] > -Math.Pow(10, -5)))
+                {
+                    firstAxis = 0;
+                    secondAxis = 1;
+                    plane = Plane.Z;
+                }
+
                 //Первый треугольник
-                findTriangleDots(result, vectorN, dots, first, second, third, plane, firstAxis, secondAxis, cntDots);
+                result = findTriangleDots(result, vectorN, dots, first, second, third, plane, firstAxis, secondAxis, cntDots);
 
                 //Второй треугольник
-                findTriangleDots(result, vectorN, dots, third, second, fourth, plane, firstAxis, secondAxis, cntDots);
+                result = findTriangleDots(result, vectorN, dots, third, second, fourth, plane, firstAxis, secondAxis, cntDots);
             }
             return result;
 

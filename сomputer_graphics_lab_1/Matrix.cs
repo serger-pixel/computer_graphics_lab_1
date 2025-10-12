@@ -162,7 +162,7 @@ namespace сomputer_graphics_lab
 
     public class DepthBuffer : Matrix<double>
     {
-        public DepthBuffer(Panel paintPanel) : base(paintPanel.Height, paintPanel.Width) 
+        public DepthBuffer(Panel paintPanel) : base(2000, 2000) 
         {
             for (int i = 0; i < getRows(); i++) 
             {
@@ -176,7 +176,7 @@ namespace сomputer_graphics_lab
 
     public class FrameBuffer : Matrix<int> 
     {
-        public FrameBuffer(Panel paintPanel) : base(paintPanel.Height, paintPanel.Width) 
+        public FrameBuffer(Panel paintPanel) : base(2000, 2000) 
         {
             for (int i = 0; i < getRows(); i++)
             {

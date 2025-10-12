@@ -15,30 +15,30 @@ namespace сomputer_graphics_lab
         {
             const int CNTDOTS = 200;
             Matrix<double> allDots = GeometryWorker.findSideDots(mainDots, connections, CNTDOTS);
-            Matrix<int> displayAllDots = сomputer_graphics_lab.Paint.transformPrMatrix(paintPanel, allDots, plane);
+            Matrix<double> displayAllDots = сomputer_graphics_lab.Paint.transformPrMatrix(paintPanel, allDots, plane);
             for (int i = 0; i < displayAllDots.getRows(); i++)
             {
                 switch (plane)
                 {
                     case Plane.X:
-                        if (depthBuffer[i, 0] < displayAllDots[i, 0])
+                        if (depthBuffer[(int)displayAllDots[i, 2], (int)displayAllDots[i, 1]] < displayAllDots[i, 0])
                         {
-                            depthBuffer[i, 0] = displayAllDots[i, 0];
-                            frameBuffer[displayAllDots[i, 2], displayAllDots[i, 1]] = color;
+                            depthBuffer[(int)displayAllDots[i, 2], (int)displayAllDots[i, 1]] = displayAllDots[i, 0];
+                            frameBuffer[(int)displayAllDots[i, 2], (int)displayAllDots[i, 1]] = color;
                         }
                         break;
                     case Plane.Y:
-                        if (depthBuffer[i, 1] < displayAllDots[i, 1])
+                        if (depthBuffer[(int)displayAllDots[i, 0], (int)displayAllDots[i, 2]] < displayAllDots[i, 1])
                         {
-                            depthBuffer[i, 1] = displayAllDots[i, 1];
-                            frameBuffer[displayAllDots[i, 0], displayAllDots[i, 2]] = color;
+                            depthBuffer[(int)displayAllDots[i, 0], (int)displayAllDots[i, 2]] = displayAllDots[i, 1];
+                            frameBuffer[(int)displayAllDots[i, 0], (int)displayAllDots[i, 2]] = color;
                         }
                         break;
                     case Plane.Z:
-                        if (depthBuffer[i, 2] < displayAllDots[i, 2])
+                        if (depthBuffer[(int)displayAllDots[i, 0], (int)displayAllDots[i, 1]] < displayAllDots[i, 2])
                         {
-                            depthBuffer[i, 2] = displayAllDots[i, 2];
-                            frameBuffer[displayAllDots[i, 0], displayAllDots[i, 1]] = color;
+                            depthBuffer[(int)displayAllDots[i, 0], (int)displayAllDots[i, 1]] = displayAllDots[i, 2];
+                            frameBuffer[(int)displayAllDots[i, 0], (int)displayAllDots[i, 1]] = color;
                         }
                         break;
                     default:
@@ -70,8 +70,8 @@ namespace сomputer_graphics_lab
             FrameBuffer frameBuff = new FrameBuffer(paintPanel);
 
             fillBuffers(rabbit.connectionsBody, rabbit.front, Plane.Z, dBuff, frameBuff, paintPanel, 1);
-            fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 3);
-            fillBuffers(rabbit.connectionsFrontBack, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 1);
+            //fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 3);
+            //fillBuffers(rabbit.connectionsFrontBack, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 1);
 
             drawByFrameBuffer(frameBuff, g);
         }
