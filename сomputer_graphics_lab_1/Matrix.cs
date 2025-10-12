@@ -174,7 +174,7 @@ namespace сomputer_graphics_lab
         } 
     }
 
-    public class FrameBuffer : Matrix<double> 
+    public class FrameBuffer : Matrix<int> 
     {
         public FrameBuffer(Panel paintPanel) : base(paintPanel.Height, paintPanel.Width) 
         {

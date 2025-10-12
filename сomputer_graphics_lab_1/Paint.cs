@@ -15,8 +15,14 @@ namespace сomputer_graphics_lab
         Z
     }
 
+
     class Paint
     {
+        public static Dictionary<int, Color> Colors = new Dictionary<int, Color>()
+        {
+            {0, Color.White }, {1, Color.Green }, {2, Color.Beige}, {3, Color.Red}
+        };
+
         public Matrix<double> front;
         public Matrix<double> back;
         public Matrix<double> face;
@@ -25,8 +31,8 @@ namespace сomputer_graphics_lab
         public List<List<int>> connectionsBody;
         public List<List<int>> connectionsFace;
         public List<List<int>> connectionsFrontBack;
-        
 
+       
         public Paint()
         {
             //Создание передней стороны

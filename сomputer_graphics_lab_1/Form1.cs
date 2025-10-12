@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
+using System.Numerics;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace сomputer_graphics_lab
@@ -8,11 +9,12 @@ namespace сomputer_graphics_lab
     {
         Paint rabbit = new Paint();
 
-        // Отрисовка с невидимыми линиями
-        private void paintDotsWithoutLines(List<List<int>> connections, Matrix<double> mainDots, Plane plane,
-            DepthBuffer depthBuffer, FrameBuffer frameBuffer, Panel paintPanel)
+        // Заполнение буферов глубины и кадра
+        private void fillBuffers(List<List<int>> connections, Matrix<double> mainDots, Plane plane,
+            DepthBuffer depthBuffer, FrameBuffer frameBuffer, Panel paintPanel, int color)
         {
-            Matrix<double> allDots = сomputer_graphics_lab.Paint.calculateDotsBetweenTwo(mainDots, connections);
+            const int CNTDOTS = 200;
+            Matrix<double> allDots = GeometryWorker.findSideDots(mainDots, connections, CNTDOTS);
             Matrix<int> displayAllDots = сomputer_graphics_lab.Paint.transformPrMatrix(paintPanel, allDots, plane);
             for (int i = 0; i < displayAllDots.getRows(); i++)
             {
@@ -22,14 +24,22 @@ namespace сomputer_graphics_lab
                         if (depthBuffer[i, 0] < displayAllDots[i, 0])
                         {
                             depthBuffer[i, 0] = displayAllDots[i, 0];
-                            frameBuffer[displayAllDots[i, 2], displayAllDots[i, 1]] = 1;
+                            frameBuffer[displayAllDots[i, 2], displayAllDots[i, 1]] = color;
                         }
                         break;
                     case Plane.Y:
-
+                        if (depthBuffer[i, 1] < displayAllDots[i, 1])
+                        {
+                            depthBuffer[i, 1] = displayAllDots[i, 1];
+                            frameBuffer[displayAllDots[i, 0], displayAllDots[i, 2]] = color;
+                        }
                         break;
                     case Plane.Z:
-
+                        if (depthBuffer[i, 2] < displayAllDots[i, 2])
+                        {
+                            depthBuffer[i, 2] = displayAllDots[i, 2];
+                            frameBuffer[displayAllDots[i, 0], displayAllDots[i, 1]] = color;
+                        }
                         break;
                     default:
                         break;
@@ -37,54 +47,38 @@ namespace сomputer_graphics_lab
             }
         }
 
-       
+        // Отрисовка по буферу кадра
+        private void drawByFrameBuffer(FrameBuffer frameBuffer, Graphics g) 
+        {
+            for (int i = 0; i < frameBuffer.getRows(); i++) 
+            {
+                for (int j = 0; j < frameBuffer.getCols(); j++) 
+                {
+                    SolidBrush brush = new SolidBrush(сomputer_graphics_lab.Paint.Colors[frameBuffer[i, j]]);
+                    g.FillRectangle(brush, i, j, 1, 1);
+                }
+            }
+        
+        }
 
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            Pen pen = new Pen(Color.Blue, 5);
-            paintDotsZ(rabbit.connectionsBody, rabbit.front, g, pen);
-            paintDotsZ(rabbit.connectionsBody, rabbit.back, g, pen);
-            paintDotsZ(rabbit.connectionsFace, rabbit.face, g, pen);
-            paintConnectionsZ(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
+
+            DepthBuffer dBuff = new DepthBuffer(paintPanel);
+            FrameBuffer frameBuff = new FrameBuffer(paintPanel);
+
+            fillBuffers(rabbit.connectionsBody, rabbit.front, Plane.Z, dBuff, frameBuff, paintPanel, 1);
+            fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 3);
+            fillBuffers(rabbit.connectionsFrontBack, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 1);
+
+            drawByFrameBuffer(frameBuff, g);
         }
 
         private void FormProjections_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
-            Pen pen = new Pen(Color.Blue, 5);
-            String text = null;
-            foreach (Control ctrl in groupBox4.Controls)
-            {
-                if (ctrl is RadioButton rb && rb.Checked)
-                {
-                    text = rb.Text;
-                }
-            }
-            switch (text)
-            {
-                case "X":
-                    paintDotsX(rabbit.connectionsBody, rabbit.front, g, pen);
-                    paintDotsX(rabbit.connectionsBody, rabbit.back, g, pen);
-                    paintDotsX(rabbit.connectionsFace, rabbit.face, g, pen);
-                    paintConnectionsX(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
-                    break;
-                case "Y":
-                    paintDotsY(rabbit.connectionsBody, rabbit.front, g, pen);
-                    paintDotsY(rabbit.connectionsBody, rabbit.back, g, pen);
-                    paintDotsY(rabbit.connectionsFace, rabbit.face, g, pen);
-                    paintConnectionsY(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
-                    break;
-                case "Z":
-                    paintDotsZ(rabbit.connectionsBody, rabbit.front, g, pen);
-                    paintDotsZ(rabbit.connectionsBody, rabbit.back, g, pen);
-                    paintDotsZ(rabbit.connectionsFace, rabbit.face, g, pen);
-                    paintConnectionsZ(rabbit.connectionsFrontBack, rabbit.front, rabbit.back, g, pen);
-                    break;
-                default:
-                    break;
-            }
+           
         }
 
         public Form1()
@@ -227,7 +221,7 @@ namespace сomputer_graphics_lab
             paintPanel.Invalidate();
         }
 
-        private void button1_Click(object sender, EventArgs e) => Application.Exit();
+        private void button1_Click(object sender, EventArgs e) => System.Windows.Forms.Application.Exit();
 
         private void projectionX_Click(object sender, EventArgs e)
         {
