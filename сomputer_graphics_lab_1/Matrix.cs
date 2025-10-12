@@ -21,6 +21,11 @@ namespace сomputer_graphics_lab
             set => innerMatrix[i][j] = value;
         }
 
+        public void addRow(List<T> str)
+        {
+            innerMatrix.Add(str);
+        }
+
         public Matrix(int row, int col)
         {
             innerMatrix = new List<List<T>>();

@@ -58,5 +58,7 @@ namespace сomputer_graphics_lab
             return result;
         }
 
+
+
     }
 }
