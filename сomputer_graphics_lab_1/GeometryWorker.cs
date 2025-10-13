@@ -19,8 +19,8 @@ namespace сomputer_graphics_lab
             switch (plane)
             {
                 case Plane.X:
-                    firstAxis = 1;
-                    secondAxis = 2;
+                    firstAxis = 2;
+                    secondAxis = 1;
                     break;
                 case Plane.Y:
                     firstAxis = 0;
@@ -48,7 +48,7 @@ namespace сomputer_graphics_lab
         //Нахождение длины вектора
         public static double findLenVector(Matrix<double> vector)
         {
-            return Math.Sqrt(Math.Pow(vector[0, 0], 2) + (Math.Pow(vector[0, 1], 2) + (Math.Pow(vector[0, 2], 2))));
+            return Math.Sqrt(Math.Pow(vector[0, 0], 2) + Math.Pow(vector[0, 1], 2) + Math.Pow(vector[0, 2], 2));
         }
 
 
@@ -60,9 +60,9 @@ namespace сomputer_graphics_lab
             Matrix<double> firstVector = findNormal(dots, 0, 1, 3);
             Matrix<double> secondVector = findNormal(dots, 1, 2, 3);
             Matrix<double> thirdVector = findNormal(dots, 0, 2, 3);
-            double firstSquare = 1/2 * findLenVector(firstVector);
-            double secondSquare = 1/2 * findLenVector(secondVector);
-            double thirdSquare = 1/2 * findLenVector(thirdVector);
+            double firstSquare = 1.0/2 * findLenVector(firstVector);
+            double secondSquare = 1.0/2 * findLenVector(secondVector);
+            double thirdSquare = 1.0/2 * findLenVector(thirdVector);
             return firstSquare + secondSquare + thirdSquare;
 
         }
@@ -93,44 +93,61 @@ namespace сomputer_graphics_lab
         public static Matrix<double> findTriangleDots(Matrix<double> result, Matrix<double> vectorN, Matrix<double> dots, int first, int second, int third,
                                             Plane plane, int firstAxis, int secondAxis, int cntDots)
         {
-            Matrix<double> firstLine = findCoeffLinearEquation(dots, first, second, plane);
-            Matrix<double> secondLine = findCoeffLinearEquation(dots, first, third, plane);
-            Matrix<double> thirdLine = findCoeffLinearEquation(dots, third, second, plane);
+            double stepFirstAxis;
+            double stepSecondAxis;
+            double currentFirstAxis;
+            double currentSecondAxis;
+            List<List<double>> sortedDots = new List<List<double>> { dots[first], dots[second], dots[third] };
 
-            double stepFirstAxis = (dots[second, firstAxis] - dots[first, firstAxis]) / cntDots;
-            double stepSecondAxis = (dots[third, secondAxis] - dots[first, secondAxis]) / cntDots;
-            double currentFirstAxis = dots[first, firstAxis] - stepFirstAxis;
-            double currentSecondAxis = dots[first, secondAxis] - stepSecondAxis;
+            sortedDots.Sort((a, b) => a[firstAxis].CompareTo(b[firstAxis]));
+            currentFirstAxis = sortedDots[0][firstAxis];
+            stepFirstAxis = (sortedDots[2][firstAxis] - currentFirstAxis) / cntDots;
+
+            sortedDots.Sort((a, b) => a[secondAxis].CompareTo(b[secondAxis]));
+            currentSecondAxis = sortedDots[0][secondAxis];
+            stepSecondAxis = (sortedDots[2][secondAxis] - currentSecondAxis) / cntDots;
+
 
             double thirdValue = 0;
+
+            double squaredValue = 0;
             for (double a = cntDots; a > 0; a--)
             {
                 currentFirstAxis += stepFirstAxis;
                 for (double b = cntDots; b > 0; b--)
                 {
                     currentSecondAxis += stepSecondAxis;
-                    if (b < a * firstLine[0, 0] + firstLine[0, 1] &&
-                        b > a * secondLine[0, 0] + secondLine[0, 1] &&
-                        b > a * thirdLine[0, 0] + thirdLine[0, 1])
+                    Matrix<double> triangleDots = new Matrix<double>(0, 0);
+                    triangleDots.addRow(new List<double> { dots[first, 0], dots[first, 1], dots[first, 2] });
+                    triangleDots.addRow(new List<double> { dots[second, 0], dots[second, 1], dots[second, 2] });
+                    triangleDots.addRow(new List<double> { dots[third, 0], dots[third, 1], dots[third, 2] });
+                    List<double> dot = null;
+                    switch (plane)
                     {
-                        switch (plane)
-                        {
-                            case Plane.X:
-                                thirdValue = -(vectorN[0, 2] * (currentFirstAxis - dots[first, 2]) + vectorN[0, 1] * (currentSecondAxis - dots[first, 1]) )/ vectorN[0, 0] + dots[first, 0];
-                                result.addRow(new List<double> { thirdValue, currentSecondAxis, currentFirstAxis });
-                                break;
-                            case Plane.Y:
-                                thirdValue = -(vectorN[0, 0] * (currentFirstAxis) - dots[first, 0] + vectorN[0, 2] * (currentSecondAxis - dots[first, 2]) )/ vectorN[0, 1] + dots[first, 1];
-                                result.addRow(new List<double> { currentFirstAxis, thirdValue, currentSecondAxis });
-                                break;
-                            case Plane.Z:
-                                thirdValue = -(vectorN[0, 0] * (currentFirstAxis - dots[first, 0]) + vectorN[0, 1] * (currentSecondAxis - dots[first, 1])) / vectorN[0, 2] + dots[first, 2];
-                                result.addRow(new List<double> { currentFirstAxis, currentSecondAxis, thirdValue });
-                                break;
-                            default: break;
-                        }
+                        case Plane.X:
+                            thirdValue = -(vectorN[0, 2] * (currentFirstAxis - dots[first, 2]) + vectorN[0, 1] * (currentSecondAxis - dots[first, 1]))/ vectorN[0, 0] + dots[first, 0];
+                            dot = (new List<double> { thirdValue, currentSecondAxis, currentFirstAxis });
+                            break;
+                        case Plane.Y:
+                            thirdValue = -(vectorN[0, 0] * (currentFirstAxis) - dots[first, 0] + vectorN[0, 2] * (currentSecondAxis - dots[first, 2]))/ vectorN[0, 1] + dots[first, 1];
+                            dot = (new List<double> { currentFirstAxis, thirdValue, currentSecondAxis });
+                            break;
+                        case Plane.Z:
+                            thirdValue = -(vectorN[0, 0] * (currentFirstAxis - dots[first, 0]) + vectorN[0, 1] * (currentSecondAxis - dots[first, 1])) / vectorN[0, 2] + dots[first, 2];
+                            dot = (new List<double> { currentFirstAxis, currentSecondAxis, thirdValue });
+                            break;
+                        default: break;
+                    }
+                    triangleDots.addRow(dot);
+                    double mainSquare = 1.0 / 2 * findLenVector(vectorN);
+                    double subSquare = findTriangleSquare(triangleDots);
+                    if (Math.Abs(mainSquare - subSquare) < Math.Pow(10, -5))
+                    {
+                        dot.Add(1.0);
+                        result.addRow(dot);
                     }
                 }
+                currentSecondAxis = sortedDots[0][secondAxis];
             }
             return result;
         }
@@ -175,23 +192,23 @@ namespace сomputer_graphics_lab
 
                 else if (((vectorN)[0, 0] < Math.Pow(10, -5) && vectorN[0, 0] > -Math.Pow(10, -5)))
                 {
-                    firstAxis = 2;
+                    firstAxis = 0;
                     secondAxis = 1;
-                    plane = Plane.X;
+                    plane = Plane.Z;
                 }
 
                 else if (((vectorN)[0, 1] < Math.Pow(10, -5) && vectorN[0, 1] > -Math.Pow(10, -5)))
                 {
                     firstAxis = 0;
                     secondAxis = 1;
-                    plane = Plane.Y;
+                    plane = Plane.Z;
                 }
 
                 else if (((vectorN)[0, 2] < Math.Pow(10, -5) && vectorN[0, 2] > -Math.Pow(10, -5)))
                 {
-                    firstAxis = 0;
+                    firstAxis = 2;
                     secondAxis = 1;
-                    plane = Plane.Z;
+                    plane = Plane.X;
                 }
 
                 //Первый треугольник

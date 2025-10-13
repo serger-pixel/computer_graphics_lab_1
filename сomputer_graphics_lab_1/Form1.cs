@@ -13,7 +13,7 @@ namespace сomputer_graphics_lab
         private void fillBuffers(List<List<int>> connections, Matrix<double> mainDots, Plane plane,
             DepthBuffer depthBuffer, FrameBuffer frameBuffer, Panel paintPanel, int color)
         {
-            const int CNTDOTS = 500;
+            const int CNTDOTS = 200;
             Matrix<double> allDots = GeometryWorker.findSideDots(mainDots, connections, CNTDOTS);
             Matrix<double> displayAllDots = сomputer_graphics_lab.Paint.transformPrMatrix(paintPanel, allDots, plane);
             for (int i = 0; i < displayAllDots.getRows(); i++)
@@ -69,8 +69,10 @@ namespace сomputer_graphics_lab
             DepthBuffer dBuff = new DepthBuffer(paintPanel);
             FrameBuffer frameBuff = new FrameBuffer(paintPanel);
 
+            fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 3);
             fillBuffers(rabbit.connectionsBody, rabbit.front, Plane.Z, dBuff, frameBuff, paintPanel, 1);
-            //fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 3);
+            fillBuffers(rabbit.connectionsBody, rabbit.back, Plane.Z, dBuff, frameBuff, paintPanel, 1);
+
             //fillBuffers(rabbit.connectionsFrontBack, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 1);
 
             drawByFrameBuffer(frameBuff, g);
