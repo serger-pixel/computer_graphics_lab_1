@@ -68,12 +68,12 @@ namespace сomputer_graphics_lab
 
             DepthBuffer dBuff = new DepthBuffer(paintPanel);
             FrameBuffer frameBuff = new FrameBuffer(paintPanel);
-
             fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 3);
             fillBuffers(rabbit.connectionsBody, rabbit.front, Plane.Z, dBuff, frameBuff, paintPanel, 1);
-            fillBuffers(rabbit.connectionsBody, rabbit.back, Plane.Z, dBuff, frameBuff, paintPanel, 1);
+            fillBuffers(rabbit.connectionsBody, rabbit.back, Plane.Z, dBuff, frameBuff, paintPanel, 2);
 
-            //fillBuffers(rabbit.connectionsFrontBack, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 1);
+
+            fillBuffers(rabbit.connectionsFrontBack, rabbit.sides, Plane.Z, dBuff, frameBuff, paintPanel, 4);
 
             drawByFrameBuffer(frameBuff, g);
         }

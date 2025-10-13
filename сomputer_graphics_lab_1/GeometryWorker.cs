@@ -129,7 +129,7 @@ namespace сomputer_graphics_lab
                             dot = (new List<double> { thirdValue, currentSecondAxis, currentFirstAxis });
                             break;
                         case Plane.Y:
-                            thirdValue = -(vectorN[0, 0] * (currentFirstAxis) - dots[first, 0] + vectorN[0, 2] * (currentSecondAxis - dots[first, 2]))/ vectorN[0, 1] + dots[first, 1];
+                            thirdValue = -(vectorN[0, 0] * (currentFirstAxis - dots[first, 0]) + vectorN[0, 2] * (currentSecondAxis - dots[first, 2]))/ vectorN[0, 1] + dots[first, 1];
                             dot = (new List<double> { currentFirstAxis, thirdValue, currentSecondAxis });
                             break;
                         case Plane.Z:
@@ -220,6 +220,7 @@ namespace сomputer_graphics_lab
             return result;
 
         }
+
 
     }
 }
