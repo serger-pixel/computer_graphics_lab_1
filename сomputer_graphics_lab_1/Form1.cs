@@ -13,7 +13,7 @@ namespace сomputer_graphics_lab
         private void fillBuffers(List<List<int>> connections, Matrix<double> mainDots, Plane plane,
             DepthBuffer depthBuffer, FrameBuffer frameBuffer, Panel paintPanel, int color)
         {
-            const int CNTDOTS = 200;
+            const int CNTDOTS = 500;
             Matrix<double> allDots = GeometryWorker.findSideDots(mainDots, connections, CNTDOTS);
             Matrix<double> displayAllDots = сomputer_graphics_lab.Paint.transformPrMatrix(paintPanel, allDots, plane);
             for (int i = 0; i < displayAllDots.getRows(); i++)

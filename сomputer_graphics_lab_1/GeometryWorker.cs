@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
@@ -44,6 +45,28 @@ namespace сomputer_graphics_lab
             return result;
         }
 
+        //Нахождение длины вектора
+        public static double findLenVector(Matrix<double> vector)
+        {
+            return Math.Sqrt(Math.Pow(vector[0, 0], 2) + (Math.Pow(vector[0, 1], 2) + (Math.Pow(vector[0, 2], 2))));
+        }
+
+
+
+
+        //Нахождение суммы площадей треугольников, образованных 4 точками.
+        public static double findTriangleSquare(Matrix<double> dots)
+        {
+            Matrix<double> firstVector = findNormal(dots, 0, 1, 3);
+            Matrix<double> secondVector = findNormal(dots, 1, 2, 3);
+            Matrix<double> thirdVector = findNormal(dots, 0, 2, 3);
+            double firstSquare = 1/2 * findLenVector(firstVector);
+            double secondSquare = 1/2 * findLenVector(secondVector);
+            double thirdSquare = 1/2 * findLenVector(thirdVector);
+            return firstSquare + secondSquare + thirdSquare;
+
+        }
+
         //Нахождение A, B, C (->n){A, B, C}. ->n - вектор нормаль
         public static Matrix<double> findNormal(Matrix<double> dots, int indFirst, int indSecond, int indThird)
         {
@@ -75,9 +98,9 @@ namespace сomputer_graphics_lab
             Matrix<double> thirdLine = findCoeffLinearEquation(dots, third, second, plane);
 
             double stepFirstAxis = (dots[second, firstAxis] - dots[first, firstAxis]) / cntDots;
-            double stepSecondAxis = (dots[second, secondAxis] - dots[first, secondAxis]) / cntDots;
-            double currentFirstAxis = dots[second, firstAxis] - stepFirstAxis;
-            double currentSecondAxis = dots[second, secondAxis] - stepSecondAxis;
+            double stepSecondAxis = (dots[third, secondAxis] - dots[first, secondAxis]) / cntDots;
+            double currentFirstAxis = dots[first, firstAxis] - stepFirstAxis;
+            double currentSecondAxis = dots[first, secondAxis] - stepSecondAxis;
 
             double thirdValue = 0;
             for (double a = cntDots; a > 0; a--)
