@@ -80,7 +80,52 @@ namespace сomputer_graphics_lab
 
         private void FormProjections_Paint(object sender, PaintEventArgs e)
         {
-           
+            Graphics g = e.Graphics;
+            String text = null;
+            DepthBuffer dBuff = new DepthBuffer(paintPanel);
+            FrameBuffer frameBuff = new FrameBuffer(paintPanel);
+            foreach (Control ctrl in groupBox4.Controls)
+            {
+                if (ctrl is RadioButton rb && rb.Checked)
+                {
+                    text = rb.Text;
+                }
+            }
+            switch (text)
+            {
+                case "X":
+                    fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.X, dBuff, frameBuff, paintPanel, 3);
+                    fillBuffers(rabbit.connectionsBody, rabbit.front, Plane.X, dBuff, frameBuff, paintPanel, 1);
+                    fillBuffers(rabbit.connectionsBody, rabbit.back, Plane.X, dBuff, frameBuff, paintPanel, 2);
+
+
+                    fillBuffers(rabbit.connectionsFrontBack, rabbit.sides, Plane.X, dBuff, frameBuff, paintPanel, 4);
+
+                    drawByFrameBuffer(frameBuff, g);
+                    break;
+                case "Y":
+                    fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Y, dBuff, frameBuff, paintPanel, 3);
+                    fillBuffers(rabbit.connectionsBody, rabbit.front, Plane.Y, dBuff, frameBuff, paintPanel, 1);
+                    fillBuffers(rabbit.connectionsBody, rabbit.back, Plane.Y, dBuff, frameBuff, paintPanel, 2);
+
+
+                    fillBuffers(rabbit.connectionsFrontBack, rabbit.sides, Plane.Y, dBuff, frameBuff, paintPanel, 4);
+
+                    drawByFrameBuffer(frameBuff, g);
+                    break;
+                case "Z":
+                    fillBuffers(rabbit.connectionsFace, rabbit.face, Plane.Z, dBuff, frameBuff, paintPanel, 3);
+                    fillBuffers(rabbit.connectionsBody, rabbit.front, Plane.Z, dBuff, frameBuff, paintPanel, 1);
+                    fillBuffers(rabbit.connectionsBody, rabbit.back, Plane.Z, dBuff, frameBuff, paintPanel, 2);
+
+
+                    fillBuffers(rabbit.connectionsFrontBack, rabbit.sides, Plane.Z, dBuff, frameBuff, paintPanel, 4);
+
+                    drawByFrameBuffer(frameBuff, g);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public Form1()

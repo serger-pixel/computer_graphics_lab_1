@@ -388,7 +388,7 @@ namespace сomputer_graphics_lab
         static public Matrix<double>? transformPrMatrix(Panel paintPanel, Matrix<double> matrix, Plane p)
         {
              Matrix<double> result = new Matrix<double>(matrix.getRows(), matrix.getCols());
-            const int zoomPix = 1;
+            const int zoomPix = 10;
             switch (p)
             {
                 case Plane.X:
